@@ -1,0 +1,24 @@
+{
+	"version": "0.2.0",
+	"configurations": [{
+		"name": "Chrome",
+		"type": "chrome",
+		"request": "launch",
+		"url": "http://localhost:8080/index.html",
+		"sourceMaps": true,
+		"userDataDir": false,
+		"port": 9222,
+		"sourceMapPathOverrides": {
+			"webpack:///./src/*": "${workspaceRoot}/src/*"
+		}
+	}, {
+		"type": "chrome",
+		"request": "attach",
+		"name": "Attach to Chrome",
+		"sourceMaps": true,
+		"port": 9222,
+		"sourceMapPathOverrides": {
+			"webpack:///./src/*": "${workspaceRoot}/src/*"
+		}
+	}]
+}
