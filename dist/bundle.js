@@ -8873,7 +8873,7 @@ var Header = (function (_super) {
     Header.prototype.render = function () {
         var date = new Date();
         var day = this.props.day !== undefined ? this.props.day : date.getDay();
-        var dayName = (day >= 1 && day <= 5) ? dayNames[day] : null;
+        var dayName = (day >= 1 && day <= 5) ? dayNames[day - 1] : null;
         date.setDate(date.getDate() + (day - date.getDay()));
         return (React.createElement(react_bootstrap_1.Col, { lg: 12 },
             React.createElement(react_bootstrap_1.PageHeader, null,
