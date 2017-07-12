@@ -21000,7 +21000,8 @@ var MenuPanel = (function (_super) {
     MenuPanel.prototype.getHeader = function (restaurant) {
         var _this = this;
         return (React.createElement(react_bootstrap_1.Row, null,
-            React.createElement("div", { className: "col-xs-9", onClick: function () { return _this.toggle(); }, style: { cursor: "pointer" } }, restaurant.name),
+            React.createElement("div", { className: "col-xs-9", onClick: function () { return _this.toggle(); }, style: { cursor: "pointer" } },
+                React.createElement("strong", null, restaurant.name)),
             React.createElement("div", { className: "col-xs-3" },
                 React.createElement(react_bootstrap_1.Glyphicon, { title: this.state.expanded ? "Collapse" : "Expand", glyph: this.state.expanded ? "chevron-up" : "chevron-down", style: { cursor: "pointer", marginLeft: "10px", float: "right" }, onClick: function () { return _this.toggle(); } }),
                 React.createElement(react_bootstrap_1.Glyphicon, { title: "Go to original page", glyph: "link", style: { cursor: "pointer", float: "right" }, onClick: function () { return _this.openPage(restaurant.url); } }))));

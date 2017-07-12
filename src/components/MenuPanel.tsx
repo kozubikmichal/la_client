@@ -59,7 +59,7 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 		return (
 			<Row>
 				<div className="col-xs-9" onClick={() => this.toggle()} style={{cursor: "pointer"}}>
-					{restaurant.name}
+					<strong>{restaurant.name}</strong>
 				</div>
 				<div className="col-xs-3">
 					<Glyphicon title={this.state.expanded ? "Collapse" : "Expand"} glyph={this.state.expanded ? "chevron-up" : "chevron-down"}
