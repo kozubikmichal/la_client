@@ -33,15 +33,13 @@ export class PanelsContainer extends React.Component<IPanelsContainerProps, {}> 
 	render() {
 		let menus = this.state.menus;
 
-		return (
-			<div>
-				{
-					menus.length ? menus.map((menu, index) => {
+		return menus.length ? 
+			(<div> 
+				{menus.map((menu, index) => {
 						return (<MenuPanel menu={menu} key={index} />);
 					})
-					: <Loader />
-				}
-			</div>
-		);
-	}
+					}
+			</div>)
+			: (<Loader />)
+	};
 }

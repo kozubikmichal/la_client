@@ -8833,7 +8833,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var ReactDOM = __webpack_require__(13);
 var Header_1 = __webpack_require__(130);
-var PanelsContainer_1 = __webpack_require__(274);
+var PanelsContainer_1 = __webpack_require__(275);
 ReactDOM.render(React.createElement("div", null,
     React.createElement(Header_1.Header, { title: "Lunch Aggregator" }),
     React.createElement(PanelsContainer_1.PanelsContainer, null)), document.getElementById("example"));
@@ -8858,31 +8858,24 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var react_bootstrap_1 = __webpack_require__(51);
-var dayNames = [
-    "Pondělí",
-    "Úterý",
-    "Středa",
-    "Čtvrtek",
-    "Pátek"
-];
+var DateManager_1 = __webpack_require__(274);
 var Header = (function (_super) {
     __extends(Header, _super);
     function Header() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.dateManager = new DateManager_1.default();
+        return _this;
     }
     Header.prototype.render = function () {
-        var date = new Date();
-        var day = this.props.day !== undefined ? this.props.day : date.getDay();
-        var dayName = (day >= 1 && day <= 5) ? dayNames[day - 1] : null;
-        date.setDate(date.getDate() + (day - date.getDay()));
+        var day = this.props.day !== undefined ? this.props.day : this.dateManager.getCurrentDay();
         return (React.createElement(react_bootstrap_1.Col, { lg: 12 },
             React.createElement(react_bootstrap_1.PageHeader, null,
                 this.props.title,
-                " ",
+                "\u00A0",
                 React.createElement("small", null,
-                    dayName,
+                    this.dateManager.getDayName(day),
                     " ",
-                    date.toLocaleDateString()))));
+                    this.dateManager.getDateForWeekDay(day).toLocaleDateString()))));
     };
     return Header;
 }(React.Component));
@@ -20852,6 +20845,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var DayOfWeek;
+(function (DayOfWeek) {
+    DayOfWeek[DayOfWeek["Sunday"] = 0] = "Sunday";
+    DayOfWeek[DayOfWeek["Monday"] = 1] = "Monday";
+    DayOfWeek[DayOfWeek["Tuesday"] = 2] = "Tuesday";
+    DayOfWeek[DayOfWeek["Wendsday"] = 3] = "Wendsday";
+    DayOfWeek[DayOfWeek["Thursday"] = 4] = "Thursday";
+    DayOfWeek[DayOfWeek["Friday"] = 5] = "Friday";
+    DayOfWeek[DayOfWeek["Saturday"] = 6] = "Saturday";
+})(DayOfWeek || (DayOfWeek = {}));
+var DateManager = (function () {
+    function DateManager() {
+    }
+    DateManager.prototype.getDayName = function (day) {
+        return [
+            "Neděle",
+            "Pondělí",
+            "Úterý",
+            "Středa",
+            "Čtvrtek",
+            "Pátek",
+            "Sobota"
+        ][day];
+    };
+    DateManager.prototype.isWeekend = function () {
+        var day = new Date().getDay();
+        return day === DayOfWeek.Saturday || day === DayOfWeek.Sunday;
+    };
+    DateManager.prototype.getDateForWeekDay = function (day) {
+        var date = new Date();
+        date.setDate(date.getDate() + (day - date.getDay()));
+        return date;
+    };
+    DateManager.prototype.getToday = function () {
+        return new Date();
+    };
+    DateManager.prototype.getCurrentDay = function () {
+        return this.getToday().getDay();
+    };
+    return DateManager;
+}());
+exports.default = DateManager;
+
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -20864,8 +20908,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-var MenuPanel_1 = __webpack_require__(275);
-var Loader_1 = __webpack_require__(278);
+var MenuPanel_1 = __webpack_require__(276);
+var Loader_1 = __webpack_require__(279);
 var PanelsContainer = (function (_super) {
     __extends(PanelsContainer, _super);
     function PanelsContainer(props) {
@@ -20887,18 +20931,20 @@ var PanelsContainer = (function (_super) {
     };
     PanelsContainer.prototype.render = function () {
         var menus = this.state.menus;
-        return (React.createElement("div", null, menus.length ? menus.map(function (menu, index) {
-            return (React.createElement(MenuPanel_1.MenuPanel, { menu: menu, key: index }));
-        })
-            : React.createElement(Loader_1.Loader, null)));
+        return menus.length ?
+            (React.createElement("div", null, menus.map(function (menu, index) {
+                return (React.createElement(MenuPanel_1.MenuPanel, { menu: menu, key: index }));
+            })))
+            : (React.createElement(Loader_1.Loader, null));
     };
+    ;
     return PanelsContainer;
 }(React.Component));
 exports.PanelsContainer = PanelsContainer;
 
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20916,8 +20962,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var react_bootstrap_1 = __webpack_require__(51);
-var MenuSection_1 = __webpack_require__(276);
-var DataStorage_1 = __webpack_require__(277);
+var MenuSection_1 = __webpack_require__(277);
+var DataStorage_1 = __webpack_require__(278);
 var MenuPanel = (function (_super) {
     __extends(MenuPanel, _super);
     function MenuPanel() {
@@ -20982,7 +21028,7 @@ exports.MenuPanel = MenuPanel;
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21024,7 +21070,7 @@ exports.MenuSection = MenuSection;
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21053,7 +21099,7 @@ exports.default = DataStorage;
 
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21076,7 +21122,8 @@ var Loader = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Loader.prototype.render = function () {
-        return (React.createElement("div", { className: "loader" }));
+        return (React.createElement("div", { className: "col-xs-12", style: { display: "flex", justifyContent: "center" } },
+            React.createElement("div", { className: "loader" })));
     };
     return Loader;
 }(React.Component));
