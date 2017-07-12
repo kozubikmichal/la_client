@@ -18,7 +18,7 @@ export class Header extends React.Component<IHeaderProps, {}> {
 	render() {
 		let date = new Date();
 		let day = this.props.day !== undefined ? this.props.day : date.getDay();
-		let dayName = (day >= 1 && day <= 5) ? dayNames[day] : null;
+		let dayName = (day >= 1 && day <= 5) ? dayNames[day - 1] : null;
 
 		date.setDate(date.getDate() + (day - date.getDay()));
 
