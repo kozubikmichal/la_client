@@ -5,13 +5,30 @@ import IMenu from "../IMenu";
 import { IRestaurant } from "../IMenu";
 import { MenuSection } from "./MenuSection";
 
+import DataStorage from "../DataStorage";
+
 interface IPanelProps {
 	menu: IMenu
 }
 
+interface IStoredState {
+	expanded: boolean;
+	[key:string]: any;
+}
+
 export class MenuPanel extends React.Component<IPanelProps, {}> {
+	private dataStorage = DataStorage;
+	private storageId: string;
+
 	state = {
 		expanded: true
+	}
+
+	componentWillMount() {
+		this.storageId = `state_${this.props.menu.restaurant.id}`;
+		this.setState({
+			expanded: this.getStoredState(this.storageId).expanded
+		})
 	}
 
 	render() {
@@ -31,13 +48,14 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 		);
 	}
 
-	toggle() {
+	private toggle() {
 		this.setState((prevState: any) => ({
 			expanded: !(prevState.expanded)
 		}))
+		this.storeState(this.storageId, "expanded", !(this.state.expanded));
 	}
 
-	getHeader(restaurant: IRestaurant): JSX.Element {
+	private getHeader(restaurant: IRestaurant): JSX.Element {
 		return (
 			<Row>
 				<div className="col-xs-9" onClick={() => this.toggle()} style={{cursor: "pointer"}}>
@@ -57,7 +75,26 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 		)
 	}
 
-	openPage(url: string) {
+	private openPage(url: string) {
 		window.open(url, "_blank");
+	}
+
+	private getStoredState(id: string): IStoredState {
+		let state = this.dataStorage.read(id);
+
+		return state !== null ? JSON.parse(state) : this.getDefaultStoredState();
+	}
+
+	private storeState(id: string, key: string, value: any) {
+		let state = this.getStoredState(id);
+		state[key] = value;
+
+		this.dataStorage.store(id, JSON.stringify(state));
+	}
+
+	private getDefaultStoredState() : IStoredState {
+		return {
+			expanded: true
+		}
 	}
 }

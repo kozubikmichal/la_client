@@ -20865,7 +20865,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var MenuPanel_1 = __webpack_require__(275);
-var Loader_1 = __webpack_require__(277);
+var Loader_1 = __webpack_require__(278);
 var PanelsContainer = (function (_super) {
     __extends(PanelsContainer, _super);
     function PanelsContainer(props) {
@@ -20917,15 +20917,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var react_bootstrap_1 = __webpack_require__(51);
 var MenuSection_1 = __webpack_require__(276);
+var DataStorage_1 = __webpack_require__(277);
 var MenuPanel = (function (_super) {
     __extends(MenuPanel, _super);
     function MenuPanel() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.dataStorage = DataStorage_1.default;
         _this.state = {
             expanded: true
         };
         return _this;
     }
+    MenuPanel.prototype.componentWillMount = function () {
+        this.storageId = "state_" + this.props.menu.restaurant.id;
+        this.setState({
+            expanded: this.getStoredState(this.storageId).expanded
+        });
+    };
     MenuPanel.prototype.render = function () {
         var menu = this.props.menu;
         var main = menu.menus[0];
@@ -20941,6 +20949,7 @@ var MenuPanel = (function (_super) {
         this.setState(function (prevState) { return ({
             expanded: !(prevState.expanded)
         }); });
+        this.storeState(this.storageId, "expanded", !(this.state.expanded));
     };
     MenuPanel.prototype.getHeader = function (restaurant) {
         var _this = this;
@@ -20952,6 +20961,20 @@ var MenuPanel = (function (_super) {
     };
     MenuPanel.prototype.openPage = function (url) {
         window.open(url, "_blank");
+    };
+    MenuPanel.prototype.getStoredState = function (id) {
+        var state = this.dataStorage.read(id);
+        return state !== null ? JSON.parse(state) : this.getDefaultStoredState();
+    };
+    MenuPanel.prototype.storeState = function (id, key, value) {
+        var state = this.getStoredState(id);
+        state[key] = value;
+        this.dataStorage.store(id, JSON.stringify(state));
+    };
+    MenuPanel.prototype.getDefaultStoredState = function () {
+        return {
+            expanded: true
+        };
     };
     return MenuPanel;
 }(React.Component));
@@ -21002,6 +21025,35 @@ exports.MenuSection = MenuSection;
 
 /***/ }),
 /* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var DataStorage = (function () {
+    function DataStorage() {
+    }
+    DataStorage.store = function (key, value) {
+        if (this.isStorageSupported()) {
+            window.localStorage.setItem(key, value);
+        }
+    };
+    DataStorage.read = function (key) {
+        if (this.isStorageSupported()) {
+            return window.localStorage.getItem(key);
+        }
+        return null;
+    };
+    DataStorage.isStorageSupported = function () {
+        return (typeof (Storage) !== "undefined");
+    };
+    return DataStorage;
+}());
+exports.default = DataStorage;
+
+
+/***/ }),
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
