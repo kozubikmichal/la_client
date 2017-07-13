@@ -9,7 +9,7 @@ export class BodySection extends React.Component<Object, {}> {
 
 	render() {
 		return this.dateManager.isWeekend() ? (
-			<ImagePlaceholder path="./img/weekend.jpg" />
+			<ImagePlaceholder path="/public/img/weekend.jpg" />
 		) : (
 			<PanelsContainer />
 		)
