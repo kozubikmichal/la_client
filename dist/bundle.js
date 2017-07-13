@@ -20919,7 +20919,7 @@ var BodySection = (function (_super) {
         return _this;
     }
     BodySection.prototype.render = function () {
-        return this.dateManager.isWeekend() ? (React.createElement(ImagePlaceholder_1.ImagePlaceholder, { path: "./img/weekend.jpg" })) : (React.createElement(PanelsContainer_1.PanelsContainer, null));
+        return this.dateManager.isWeekend() ? (React.createElement(ImagePlaceholder_1.ImagePlaceholder, { path: "/public/img/weekend.jpg" })) : (React.createElement(PanelsContainer_1.PanelsContainer, null));
     };
     return BodySection;
 }(React.Component));
