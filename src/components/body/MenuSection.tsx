@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Panel, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
-import { IMenuSection } from "../IMenu";
+import { IMenuSection } from "../../IMenu";
 
 interface ISectionProps {
 	section: IMenuSection

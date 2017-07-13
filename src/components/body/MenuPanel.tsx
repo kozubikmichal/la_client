@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Panel, Table, Glyphicon, Row } from "react-bootstrap";
 
-import IMenu from "../IMenu";
-import { IRestaurant } from "../IMenu";
+import IMenu from "../../IMenu";
+import { IRestaurant } from "../../IMenu";
 import { MenuSection } from "./MenuSection";
 
-import DataStorage from "../DataStorage";
+import DataStorage from "../../DataStorage";
 
 interface IPanelProps {
 	menu: IMenu
 }
 
-interface IStoredState {
+interface IMenuPanelState {
 	expanded: boolean;
 	[key:string]: any;
 }
@@ -20,7 +20,7 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 	private dataStorage = DataStorage;
 	private storageId: string;
 
-	state = {
+	state: IMenuPanelState = {
 		expanded: true
 	}
 
@@ -79,7 +79,7 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 		window.open(url, "_blank");
 	}
 
-	private getStoredState(id: string): IStoredState {
+	private getStoredState(id: string): IMenuPanelState {
 		let state = this.dataStorage.read(id);
 
 		return state !== null ? JSON.parse(state) : this.getDefaultStoredState();
@@ -92,7 +92,7 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 		this.dataStorage.store(id, JSON.stringify(state));
 	}
 
-	private getDefaultStoredState() : IStoredState {
+	private getDefaultStoredState() : IMenuPanelState {
 		return {
 			expanded: true
 		}

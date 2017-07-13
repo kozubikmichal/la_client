@@ -1,33 +1,30 @@
 import * as React from "react";
 
+import ApiWrapper from "../../ApiWrapper";
+
 import { MenuPanel } from "./MenuPanel"
-import { Loader } from "./Loader"
+import { Loader } from "../Loader"
 
-import IMenu from "../IMenu";
+import IMenu from "../../IMenu";
 
-interface IPanelsContainerProps {}
 interface IState {
 	menus: IMenu[]
 }
 
-export class PanelsContainer extends React.Component<IPanelsContainerProps, {}> {
+export class PanelsContainer extends React.Component<Object, {}> {
+	private api = new ApiWrapper();
+
 	state: IState = {
 		menus: []
 	}
 
-	constructor(props: IPanelsContainerProps) {
-		super(props);
-	}
-
 	componentDidMount() {
-		fetch("/api/menu")
-			.then((res) => res.json())
+		this.api.loadAllMenus()
 			.then((data) => {
 				this.setState({
 					menus: data
 				});
 			})
-
 	}
 
 	render() {
