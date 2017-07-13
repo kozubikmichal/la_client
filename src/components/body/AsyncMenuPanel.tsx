@@ -53,7 +53,7 @@ export class AsyncMenuPanel extends React.Component<IPanelProps, {}> {
 
 		return (
 			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				<Panel expanded={this.state.expanded} collapsible bsStyle="info" header={this.getHeader(restaurant)}>
+				<Panel expanded={this.state.expanded} collapsible bsStyle="primary" header={this.getHeader(restaurant)}>
 					{ menu ? this.getSections(main, others) : (<Loader />)}
 				</Panel>
 			</div>

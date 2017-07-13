@@ -21128,7 +21128,7 @@ var AsyncMenuPanel = (function (_super) {
         var main = menu && menu.menus[0];
         var others = menu && menu.menus.slice(1);
         return (React.createElement("div", { className: "col-lg-3 col-md-4 col-sm-6 col-xs-12" },
-            React.createElement(react_bootstrap_1.Panel, { expanded: this.state.expanded, collapsible: true, bsStyle: "info", header: this.getHeader(restaurant) }, menu ? this.getSections(main, others) : (React.createElement(Loader_1.Loader, null)))));
+            React.createElement(react_bootstrap_1.Panel, { expanded: this.state.expanded, collapsible: true, bsStyle: "primary", header: this.getHeader(restaurant) }, menu ? this.getSections(main, others) : (React.createElement(Loader_1.Loader, null)))));
     };
     AsyncMenuPanel.prototype.getSections = function (main, others) {
         return [(React.createElement(MenuSection_1.MenuSection, { section: main })),

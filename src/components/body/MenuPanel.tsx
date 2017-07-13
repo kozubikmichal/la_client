@@ -38,7 +38,7 @@ export class MenuPanel extends React.Component<IPanelProps, {}> {
 
 		return (
 			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				<Panel expanded={this.state.expanded} collapsible bsStyle="info" header={this.getHeader(menu.restaurant)}>
+				<Panel expanded={this.state.expanded} collapsible bsStyle="primary" header={this.getHeader(menu.restaurant)}>
 					<MenuSection section={main} />
 					{ others.map((section, index) => {
 						return (<MenuSection section={section} key={index}/>)
