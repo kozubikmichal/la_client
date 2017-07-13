@@ -19,7 +19,7 @@ export class PanelsContainer extends React.Component<Object, {}> {
 	}
 
 	componentDidMount() {
-		this.api.loadAllMenus()
+		this.api.loadMenus()
 			.then((data) => {
 				this.setState({
 					menus: data

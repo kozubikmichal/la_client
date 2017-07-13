@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ImagePlaceholder } from "./ImagePlaceholder"
 import { PanelsContainer } from "./body/PanelsContainer"
+import { AsyncPanelsContainer } from "./body/AsyncPanelsContainer"
 
 import DateManager from "../DateManager";
 
@@ -11,7 +12,7 @@ export class BodySection extends React.Component<Object, {}> {
 		return this.dateManager.isWeekend() ? (
 			<ImagePlaceholder path="/public/img/weekend.jpg" />
 		) : (
-			<PanelsContainer />
+			<AsyncPanelsContainer />
 		)
 	}
 }
