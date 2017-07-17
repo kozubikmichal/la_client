@@ -8974,18 +8974,37 @@ var Header = (function (_super) {
     function Header() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.dateManager = new DateManager_1.default();
+        _this.state = {
+            now: null
+        };
         return _this;
     }
+    Header.prototype.componentWillMount = function () {
+        this.updateTime();
+    };
+    Header.prototype.componentDidMount = function () {
+        var _this = this;
+        setInterval(function () { return _this.updateTime(); }, 1000);
+    };
     Header.prototype.render = function () {
+        var now = this.state.now || this.dateManager.getToday();
         var day = this.props.day !== undefined ? this.props.day : this.dateManager.getCurrentDay();
         return (React.createElement(react_bootstrap_1.Col, { lg: 12 },
             React.createElement(react_bootstrap_1.PageHeader, null,
-                this.props.title,
-                "\u00A0",
-                React.createElement("small", null,
-                    this.dateManager.getDayName(day),
-                    " ",
-                    this.dateManager.getDateForWeekDay(day).toLocaleDateString()))));
+                React.createElement("span", null,
+                    this.props.title,
+                    "\u00A0",
+                    React.createElement("small", null,
+                        this.dateManager.getDayName(day),
+                        " ",
+                        this.dateManager.getDateForWeekDay(day).toLocaleDateString()),
+                    "\u00A0",
+                    React.createElement("span", { style: { float: "right" } }, now.toLocaleTimeString())))));
+    };
+    Header.prototype.updateTime = function () {
+        this.setState({
+            now: this.dateManager.getToday()
+        });
     };
     return Header;
 }(React.Component));
