@@ -1,13 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Header } from "./components/Header";
-import { BodySection } from "./components/BodySection";
+import { App } from "./components/App";
 
 ReactDOM.render(
-	<div>
-		<Header title="Lunch Aggregator" />
-		<BodySection />
-	</div>,
+	<App />,
 	document.getElementById("example")
 );
