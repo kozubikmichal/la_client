@@ -2,7 +2,7 @@ import * as React from "react";
 
 import ApiWrapper from "../../ApiWrapper";
 
-import { AsyncMenuPanel } from "./AsyncMenuPanel"
+import Panel from "../../containers/Panel"
 import { Loader } from "../Loader"
 
 import { IRestaurant } from "../../IMenu";
@@ -33,7 +33,7 @@ export class AsyncPanelsContainer extends React.Component<Object, {}> {
 		return restaurants.length ? 
 			(<div> 
 				{restaurants.map((restaurant, index) => {
-						return (<AsyncMenuPanel restaurant={restaurant} key={index} />);
+						return (<Panel restaurant={restaurant} key={index} />);
 					})
 					}
 			</div>)
