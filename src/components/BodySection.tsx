@@ -1,15 +1,14 @@
 import * as React from "react";
 import { ImagePlaceholder } from "./ImagePlaceholder"
 import PanelsContainer from "../containers/PanelsContainer"
-import { AsyncPanelsContainer } from "./body/AsyncPanelsContainer"
 
-import DateManager from "../DateManager";
+export interface IBodyDataProps {
+	isWeekend: boolean
+}
 
-export class BodySection extends React.Component<Object, {}> {
-	private dateManager = new DateManager();
-
+export class BodySection extends React.Component<IBodyDataProps, {}> {
 	render() {
-		return this.dateManager.isWeekend() ? (
+		return this.props.isWeekend ? (
 			<ImagePlaceholder path="/public/img/weekend.jpg" />
 		) : (
 			<PanelsContainer />

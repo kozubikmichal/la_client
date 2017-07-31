@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 
-import { App } from "./components/App";
+import App from "./containers/App";
 import { IState } from "./IState"
 import reducers from "./reducers";
 import StateStorage from "./StateStorage";

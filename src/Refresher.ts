@@ -1,10 +1,14 @@
 import DateManager from "./DateManager";
 
 export default class Refresher {
+	private isRunning = false;
 	private intervalInHours = 3;
 
 	public start(): void {
-		setInterval(() => this.refresh(), this.hToMs(this.intervalInHours));
+		if (!this.isRunning) {
+			setInterval(() => this.refresh(), this.hToMs(this.intervalInHours));
+			this.isRunning = true;
+		}
 	}
 
 	private refresh() {

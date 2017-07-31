@@ -1,16 +1,15 @@
 import * as React from "react";
-import Refresher from "../Refresher";
 
-import { Header } from "./Header";
-import { BodySection } from "./BodySection";
+import Header from "../containers/Header";
+import BodySection from "../containers/BodySection";
 
-export class App extends React.Component<Object, {}> {
-	private refresher = new Refresher();
+export interface IAppCallbackProps {
+	onDidMount: () => void
+}
 
-	constructor(props: any) {
-		super(props);
-
-		this.refresher.start()
+export class App extends React.Component<IAppCallbackProps, {}> {
+	componentDidMount() {
+		this.props.onDidMount()
 	}
 
 	render() {

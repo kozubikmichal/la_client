@@ -10,5 +10,7 @@ export default {
 
 	Menu_Load: "Menu_Load",
 	Menu_Load_Success: "Menu_Load_Success",
-	Menu_Load_Failure: "Menu_Load_Failure"
+	Menu_Load_Failure: "Menu_Load_Failure",
+
+	Refresher_Start: "Refresher_Start"
 }

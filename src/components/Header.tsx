@@ -7,12 +7,12 @@ interface IState {
 	now: Date
 }
 
-interface IHeaderProps {
+export interface IHeaderDataProps {
 	title?: string;
 	day?: number
 }
 
-export class Header extends React.Component<IHeaderProps, {}> {
+export class Header extends React.Component<IHeaderDataProps, {}> {
 	private dateManager = new DateManager();
 	state: IState = {
 		now: null
