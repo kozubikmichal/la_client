@@ -7,7 +7,8 @@ export default class StateStorage {
 			collapsed: [],
 			hidden: []
 		},
-		menus: {}
+		menus: {},
+		loadedRestaurants: []
 	}
 
 	constructor(private key = "state") { }

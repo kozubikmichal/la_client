@@ -1,4 +1,5 @@
 import IMenu from "./IMenu"
+import { IRestaurant } from "./IMenu"
 
 export interface IRestaurants {
 	collapsed: Array<string>;
@@ -11,5 +12,6 @@ export interface IMenus {
 
 export interface IState {
 	restaurants: IRestaurants,
-	menus: IMenus
+	menus: IMenus,
+	loadedRestaurants: IRestaurant[]
 }

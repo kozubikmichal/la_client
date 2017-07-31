@@ -1,6 +1,6 @@
 interface IAction {
 	readonly type: string,
-	payload: any
+	payload?: any
 }
 
 export default IAction;

@@ -1,35 +1,26 @@
 import * as React from "react";
 
-import ApiWrapper from "../../ApiWrapper";
-
 import Panel from "../../containers/Panel"
 import { Loader } from "../Loader"
 
 import { IRestaurant } from "../../IMenu";
 
-interface IState {
+export interface IAsyncPanelsContainerDataProps {
 	restaurants: IRestaurant[]
 }
 
-export class AsyncPanelsContainer extends React.Component<Object, {}> {
-	private api = new ApiWrapper();
+export interface IAsyncPanelsContainerCallbackProps {
+	loadRestaurants: () => void
+}
 
-	state: IState = {
-		restaurants: []
-	}
-
+export class AsyncPanelsContainer extends React.Component<IAsyncPanelsContainerDataProps & IAsyncPanelsContainerCallbackProps, {}> {
 	componentDidMount() {
-		this.api.loadRestaurants()
-			.then((data) => {
-				this.setState({
-					restaurants: data
-				});
-			})
+		this.props.loadRestaurants()
 	}
 
 	render() {
-		let restaurants = this.state.restaurants;
-
+		let { restaurants }  = this.props;
+		
 		return restaurants.length ? 
 			(<div> 
 				{restaurants.map((restaurant, index) => {

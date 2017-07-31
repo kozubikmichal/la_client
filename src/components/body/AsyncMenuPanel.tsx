@@ -18,16 +18,8 @@ export interface IAsyncMenuPanelCallbackProps {
 	loadMenu: () => void
 }
 
-interface IMenuPanelState {
-	[key:string]: any;
-}
-
 export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & IAsyncMenuPanelCallbackProps, {}> {
 	private toggle = () => this.props.onPressHeader(this.props.expanded);
-
-	state: IMenuPanelState = {
-		menu: null
-	}
 
 	componentDidMount() {
 		this.props.loadMenu()

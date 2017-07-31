@@ -17,33 +17,29 @@ interface IPanelProps {
 	restaurant: IRestaurant,
 }
 
-const createPanelContainer = (apiWrapper: ApiWrapper) => {
-	const mapStateToProps = (state: IState, ownProps: IPanelProps): IAsyncMenuPanelDataProps => {
-		return {
-			expanded: state.restaurants.collapsed.indexOf(ownProps.restaurant.id) === -1,
-			restaurant: ownProps.restaurant,
-			menu: state.menus[ownProps.restaurant.id]
-		};
-	}
-
-	const mapDispatchToProps = (dispatch: Function, ownProps: IPanelProps): IAsyncMenuPanelCallbackProps => {
-		return {
-			onPressHeader: (expanded: boolean): void => {
-				let action = expanded ? collapseRestaurant : expandRestaurant;
-				dispatch(action(ownProps.restaurant.id));
-			},
-			onPressLink: () => {
-				window.open(ownProps.restaurant.url, "_blank");
-			},
-			loadMenu: () => {
-				dispatch(loadMenu(ownProps.restaurant.id))
-			}
-		}
-	}
-
-	return connect(mapStateToProps, mapDispatchToProps)(AsyncMenuPanel);
+const mapStateToProps = (state: IState, ownProps: IPanelProps): IAsyncMenuPanelDataProps => {
+	return {
+		expanded: state.restaurants.collapsed.indexOf(ownProps.restaurant.id) === -1,
+		restaurant: ownProps.restaurant,
+		menu: state.menus[ownProps.restaurant.id]
+	};
 }
 
-const Panel = createPanelContainer(new ApiWrapper());
+const mapDispatchToProps = (dispatch: Function, ownProps: IPanelProps): IAsyncMenuPanelCallbackProps => {
+	return {
+		onPressHeader: (expanded: boolean): void => {
+			let action = expanded ? collapseRestaurant : expandRestaurant;
+			dispatch(action(ownProps.restaurant.id));
+		},
+		onPressLink: () => {
+			window.open(ownProps.restaurant.url, "_blank");
+		},
+		loadMenu: () => {
+			dispatch(loadMenu(ownProps.restaurant.id))
+		}
+	}
+}
+
+const Panel = connect(mapStateToProps, mapDispatchToProps)(AsyncMenuPanel);
 
 export default Panel;
