@@ -14,9 +14,10 @@ export function closeSettings(): IAction {
 	}
 }
 
-export function saveSettings(settings: ISettings): IAction {
-	return {
+export const saveSettings = (settings: ISettings) => (dispatch: Function) => {
+	dispatch({
 		type: actionTypes.Settings_Save,
 		payload: settings
-	}
+	})
+	dispatch(closeSettings());
 }

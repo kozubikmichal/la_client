@@ -1084,7 +1084,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(25)))
 
 /***/ }),
 /* 16 */
@@ -1376,36 +1376,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject       = __webpack_require__(29)
-  , IE8_DOM_DEFINE = __webpack_require__(98)
-  , toPrimitive    = __webpack_require__(63)
-  , dP             = Object.defineProperty;
-
-exports.f = __webpack_require__(30) ? Object.defineProperty : function defineProperty(O, P, Attributes){
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if(IE8_DOM_DEFINE)try {
-    return dP(O, P, Attributes);
-  } catch(e){ /* empty */ }
-  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
-  if('value' in Attributes)O[P] = Attributes.value;
-  return O;
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function(it, key){
-  return hasOwnProperty.call(it, key);
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(global) {/*global window, global*/
 var util = __webpack_require__(87)
 var assert = __webpack_require__(152)
@@ -1496,10 +1466,40 @@ function consoleAssert(expression) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject       = __webpack_require__(29)
+  , IE8_DOM_DEFINE = __webpack_require__(98)
+  , toPrimitive    = __webpack_require__(63)
+  , dP             = Object.defineProperty;
+
+exports.f = __webpack_require__(30) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if(IE8_DOM_DEFINE)try {
+    return dP(O, P, Attributes);
+  } catch(e){ /* empty */ }
+  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+  if('value' in Attributes)O[P] = Attributes.value;
+  return O;
+};
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function(it, key){
+  return hasOwnProperty.call(it, key);
+};
+
+/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP         = __webpack_require__(25)
+var dP         = __webpack_require__(26)
   , createDesc = __webpack_require__(39);
 module.exports = __webpack_require__(30) ? function(object, key, value){
   return dP.f(object, key, createDesc(1, value));
@@ -3179,7 +3179,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(25)))
 
 /***/ }),
 /* 61 */
@@ -3456,8 +3456,8 @@ module.exports = Object.create || function create(O, Properties){
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var def = __webpack_require__(25).f
-  , has = __webpack_require__(26)
+var def = __webpack_require__(26).f
+  , has = __webpack_require__(27)
   , TAG = __webpack_require__(17)('toStringTag');
 
 module.exports = function(it, tag, stat){
@@ -3478,7 +3478,7 @@ var global         = __webpack_require__(21)
   , core           = __webpack_require__(16)
   , LIBRARY        = __webpack_require__(73)
   , wksExt         = __webpack_require__(76)
-  , defineProperty = __webpack_require__(25).f;
+  , defineProperty = __webpack_require__(26).f;
 module.exports = function(name){
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
@@ -5100,7 +5100,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35), __webpack_require__(10), __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35), __webpack_require__(10), __webpack_require__(25)))
 
 /***/ }),
 /* 88 */
@@ -5173,7 +5173,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(25)))
 
 /***/ }),
 /* 89 */
@@ -5787,7 +5787,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(25)))
 
 /***/ }),
 /* 94 */
@@ -5953,7 +5953,7 @@ module.exports = function(it){
 /* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has          = __webpack_require__(26)
+var has          = __webpack_require__(27)
   , toIObject    = __webpack_require__(22)
   , arrayIndexOf = __webpack_require__(191)(false)
   , IE_PROTO     = __webpack_require__(67)('IE_PROTO');
@@ -6025,7 +6025,7 @@ var LIBRARY        = __webpack_require__(73)
   , $export        = __webpack_require__(20)
   , redefine       = __webpack_require__(105)
   , hide           = __webpack_require__(28)
-  , has            = __webpack_require__(26)
+  , has            = __webpack_require__(27)
   , Iterators      = __webpack_require__(41)
   , $iterCreate    = __webpack_require__(196)
   , setToStringTag = __webpack_require__(75)
@@ -6117,7 +6117,7 @@ var pIE            = __webpack_require__(40)
   , createDesc     = __webpack_require__(39)
   , toIObject      = __webpack_require__(22)
   , toPrimitive    = __webpack_require__(63)
-  , has            = __webpack_require__(26)
+  , has            = __webpack_require__(27)
   , IE8_DOM_DEFINE = __webpack_require__(98)
   , gOPD           = Object.getOwnPropertyDescriptor;
 
@@ -9822,13 +9822,13 @@ function closeSettings() {
     };
 }
 exports.closeSettings = closeSettings;
-function saveSettings(settings) {
-    return {
+exports.saveSettings = function (settings) { return function (dispatch) {
+    dispatch({
         type: actionTypes_1.default.Settings_Save,
         payload: settings
-    };
-}
-exports.saveSettings = saveSettings;
+    });
+    dispatch(closeSettings());
+}; };
 
 
 /***/ }),
@@ -10567,7 +10567,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(27)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(25)))
 
 /***/ }),
 /* 150 */
@@ -12786,7 +12786,7 @@ module.exports = function(Constructor, NAME, next){
 /* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP       = __webpack_require__(25)
+var dP       = __webpack_require__(26)
   , anObject = __webpack_require__(29)
   , getKeys  = __webpack_require__(31);
 
@@ -12811,7 +12811,7 @@ module.exports = __webpack_require__(21).document && document.documentElement;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has         = __webpack_require__(26)
+var has         = __webpack_require__(27)
   , toObject    = __webpack_require__(71)
   , IE_PROTO    = __webpack_require__(67)('IE_PROTO')
   , ObjectProto = Object.prototype;
@@ -12920,7 +12920,7 @@ module.exports = __webpack_require__(16).Symbol;
 
 // ECMAScript 6 symbols shim
 var global         = __webpack_require__(21)
-  , has            = __webpack_require__(26)
+  , has            = __webpack_require__(27)
   , DESCRIPTORS    = __webpack_require__(30)
   , $export        = __webpack_require__(20)
   , redefine       = __webpack_require__(105)
@@ -12942,7 +12942,7 @@ var global         = __webpack_require__(21)
   , _create        = __webpack_require__(74)
   , gOPNExt        = __webpack_require__(211)
   , $GOPD          = __webpack_require__(107)
-  , $DP            = __webpack_require__(25)
+  , $DP            = __webpack_require__(26)
   , $keys          = __webpack_require__(31)
   , gOPD           = $GOPD.f
   , dP             = $DP.f
@@ -13159,8 +13159,8 @@ setToStringTag(global.JSON, 'JSON', true);
 
 var META     = __webpack_require__(46)('meta')
   , isObject = __webpack_require__(37)
-  , has      = __webpack_require__(26)
-  , setDesc  = __webpack_require__(25).f
+  , has      = __webpack_require__(27)
+  , setDesc  = __webpack_require__(26).f
   , id       = 0;
 var isExtensible = Object.isExtensible || function(){
   return true;
@@ -15769,7 +15769,7 @@ module.exports = function(it){
 
 "use strict";
 
-var $defineProperty = __webpack_require__(25)
+var $defineProperty = __webpack_require__(26)
   , createDesc      = __webpack_require__(39);
 
 module.exports = function(object, index, value){
@@ -23478,8 +23478,8 @@ var AsyncPanelsContainer = (function (_super) {
     AsyncPanelsContainer.prototype.render = function () {
         var restaurants = this.props.restaurants;
         return restaurants.length ?
-            (React.createElement("div", null, restaurants.map(function (restaurant, index) {
-                return (React.createElement(Panel_1.default, { restaurant: restaurant, key: index }));
+            (React.createElement("div", null, restaurants.map(function (restaurant) {
+                return (React.createElement(Panel_1.default, { restaurant: restaurant, key: restaurant.id }));
             })))
             : (React.createElement(Loader_1.Loader, null));
     };
@@ -23494,7 +23494,7 @@ exports.AsyncPanelsContainer = AsyncPanelsContainer;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(console) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_redux_1 = __webpack_require__(24);
 var AsyncMenuPanel_1 = __webpack_require__(328);
@@ -23517,6 +23517,7 @@ var mapDispatchToProps = function (dispatch, ownProps) {
             window.open(ownProps.restaurant.url, "_blank");
         },
         loadMenu: function () {
+            console.log(ownProps.restaurant.id);
             dispatch(menu_1.loadMenu(ownProps.restaurant.id));
         }
     };
@@ -23524,6 +23525,7 @@ var mapDispatchToProps = function (dispatch, ownProps) {
 var Panel = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(AsyncMenuPanel_1.AsyncMenuPanel);
 exports.default = Panel;
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
 
 /***/ }),
 /* 328 */
