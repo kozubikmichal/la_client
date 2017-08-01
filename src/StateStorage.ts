@@ -9,7 +9,13 @@ export default class StateStorage {
 		},
 		menus: {},
 		loadedRestaurants: [],
-		showSettings: false
+		showSettings: false,
+		newFeatures: [{
+			description: "Settings",
+			elementId: "settings",
+			shown: false,
+			dateAdded: new Date(2017, 7, 1)
+		}]
 	}
 
 	constructor(private key = "state") { }
@@ -38,7 +44,8 @@ export default class StateStorage {
 
 	private stateToPermaState(state: IState): any {
 		return {
-			restaurants: state.restaurants
+			restaurants: state.restaurants,
+			newFeatures: state.newFeatures
 		}
 	}
 }

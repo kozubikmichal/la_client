@@ -3,7 +3,7 @@ import { Panel, Table, Glyphicon, Row } from "react-bootstrap";
 import { Loader } from "../Loader"
 
 import IMenu from "../../IMenu";
-import { IRestaurant } from "../../IMenu";
+import { IRestaurant, IMenuSection } from "../../IMenu";
 import { MenuSection } from "./MenuSection";
 
 export interface IAsyncMenuPanelDataProps {
@@ -39,8 +39,8 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 		);
 	}
 
-	private getSections(main: any, others: any[]) {
-		return [(<MenuSection section={main} />),
+	private getSections(main: IMenuSection, others: IMenuSection[]) {
+		return [(<MenuSection section={main} key={main.name || "main"} />),
 					others.map((section, index) => {
 						return (<MenuSection section={section} key={index}/>)
 		})]

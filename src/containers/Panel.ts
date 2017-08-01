@@ -35,7 +35,6 @@ const mapDispatchToProps = (dispatch: Function, ownProps: IPanelProps): IAsyncMe
 			window.open(ownProps.restaurant.url, "_blank");
 		},
 		loadMenu: () => {
-			console.log(ownProps.restaurant.id);
 			dispatch(loadMenu(ownProps.restaurant.id))
 		}
 	}

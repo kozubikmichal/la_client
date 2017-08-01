@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PageHeader, Col, Glyphicon, Button } from "react-bootstrap";
+import { PageHeader, Col, Glyphicon, Button, Tooltip, Popover } from "react-bootstrap";
 
 import DateManager from "../DateManager";
 
@@ -48,11 +48,12 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 						<span style={{float: "right"}}>
 							{now.toLocaleTimeString()}
 						</span>
-						<Glyphicon glyph="cog" color="black" title="Settings"
+						<Glyphicon glyph="cog" color="black" title="Settings" id="settings"
 							style={{ fontSize: "1.5rem", color: "black", cursor: "pointer"
 							}}
 							onClick={this.props.openSettings}
-						/>
+						>
+						</Glyphicon>
 					</span>
 				</PageHeader>
 			</Col>

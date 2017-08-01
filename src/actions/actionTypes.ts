@@ -14,5 +14,7 @@ export default {
 
 	Settings_Open: "Settings_Open",
 	Settings_Close: "Settings_Close",
-	Settings_Save: "Settings_Save"
+	Settings_Save: "Settings_Save",
+
+	NewFeature_Close: "NewFeature_Close"
 }

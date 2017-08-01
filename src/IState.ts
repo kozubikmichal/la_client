@@ -10,9 +10,17 @@ export interface IMenus {
 	[id: string]: IMenu
 }
 
+export interface INewFeature {
+	elementId: string,
+	shown: boolean,
+	description: string,
+	dateAdded: Date
+}
+
 export interface IState {
 	restaurants: IRestaurants,
 	menus: IMenus,
 	loadedRestaurants: IRestaurant[],
-	showSettings: boolean
+	showSettings: boolean,
+	newFeatures: INewFeature[]
 }

@@ -24,7 +24,7 @@ export class Settings extends React.Component<ISettingsDataProps & ISettingsCall
 					<span style={{ fontSize: "1.5rem"}}>
 					{
 						this.props.config.restaurants.map((r, index) => 
-							(<Checkbox defaultChecked={!r.hidden} onChange={(e) => this.onChange(e, index)} >{r.restaurant.name}</Checkbox>)
+							(<Checkbox key={r.restaurant.id} defaultChecked={!r.hidden} onChange={(e) => this.onChange(e, index)} >{r.restaurant.name}</Checkbox>)
 						)
 					}
 					</span>
