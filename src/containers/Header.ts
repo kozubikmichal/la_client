@@ -2,10 +2,12 @@ import { connect } from "react-redux";
 
 import {
 	IHeaderDataProps,
+	IHeaderCallbackProps,
 	Header
 } from "../components/Header"
 
 import { IState } from "../IState";
+import { openSettings } from "../actions/settings";
 
 interface IHeaderProps {
 	title?: string,
@@ -15,10 +17,19 @@ interface IHeaderProps {
 const mapStateToProps = (state: IState, ownProps: IHeaderProps): IHeaderDataProps => {
 	return {
 		title: ownProps.title,
-		day: ownProps.day
+		day: ownProps.day,
+		showSettings: state.showSettings
 	};
 }
 
-const HeaderContainer = connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = (dispatch: Function): IHeaderCallbackProps => {
+	return {
+		openSettings: () => {
+			dispatch(openSettings())
+		}
+	}
+}
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 export default HeaderContainer;

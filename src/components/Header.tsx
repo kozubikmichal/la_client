@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PageHeader, Col } from "react-bootstrap";
+import { PageHeader, Col, Glyphicon, Button } from "react-bootstrap";
 
 import DateManager from "../DateManager";
 
@@ -9,10 +9,15 @@ interface IState {
 
 export interface IHeaderDataProps {
 	title?: string;
-	day?: number
+	day?: number,
+	showSettings: boolean
 }
 
-export class Header extends React.Component<IHeaderDataProps, {}> {
+export interface IHeaderCallbackProps {
+	openSettings: () => void
+}
+
+export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackProps, {}> {
 	private dateManager = new DateManager();
 	state: IState = {
 		now: null
@@ -28,6 +33,7 @@ export class Header extends React.Component<IHeaderDataProps, {}> {
 
 	render() {
 		let now = this.state.now || this.dateManager.getToday();
+		let settings = this.props.showSettings;
 		let day = this.props.day !== undefined ? this.props.day : this.dateManager.getCurrentDay();
 		
 		return (
@@ -42,6 +48,11 @@ export class Header extends React.Component<IHeaderDataProps, {}> {
 						<span style={{float: "right"}}>
 							{now.toLocaleTimeString()}
 						</span>
+						<Glyphicon glyph="cog" color="black" title="Settings"
+							style={{ fontSize: "1.5rem", color: "black", cursor: "pointer"
+							}}
+							onClick={this.props.openSettings}
+						/>
 					</span>
 				</PageHeader>
 			</Col>

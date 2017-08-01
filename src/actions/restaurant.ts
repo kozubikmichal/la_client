@@ -48,17 +48,3 @@ export function expandRestaurant(id: string): IRestaurantAction {
 		payload: id
 	}
 }
-
-export function hideRestaurant(id: string): IRestaurantAction {
-	return {
-		type: actionTypes.Restaurant_Hide,
-		payload: id
-	}
-}
-
-export function unhideRestaurant(id: string): IRestaurantAction {
-	return {
-		type: actionTypes.Restaurant_Unhide,
-		payload: id
-	}
-}

@@ -13,5 +13,6 @@ export interface IMenus {
 export interface IState {
 	restaurants: IRestaurants,
 	menus: IMenus,
-	loadedRestaurants: IRestaurant[]
+	loadedRestaurants: IRestaurant[],
+	showSettings: boolean
 }

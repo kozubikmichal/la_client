@@ -12,7 +12,7 @@ import { loadRestaurants } from "../actions/restaurant";
 
 const mapStateToProps = (state: IState): IAsyncPanelsContainerDataProps => {
 	return {
-		restaurants: state.loadedRestaurants
+		restaurants: state.loadedRestaurants.filter(r => state.restaurants.hidden.indexOf(r.id) === -1)
 	};
 }
 
