@@ -14,7 +14,7 @@ export interface INewFeature {
 	elementId: string,
 	shown: boolean,
 	description: string,
-	dateAdded: Date
+	dateAdded: number
 }
 
 export interface IState {

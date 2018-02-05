@@ -14,7 +14,7 @@ export default class StateStorage {
 			description: "Settings",
 			elementId: "settings",
 			shown: false,
-			dateAdded: new Date(2017, 7, 1)
+			dateAdded: (new Date(2017, 7, 1)).getTime()
 		}]
 	}
 

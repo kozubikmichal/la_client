@@ -32,8 +32,15 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 
 		return (
 			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				<Panel expanded={this.props.expanded} collapsible bsStyle="primary" header={this.getHeader(restaurant)}>
-					{ menu ? this.getSections(main, others) : (<Loader />)}
+				<Panel expanded={this.props.expanded} bsStyle="primary" onToggle={() => {}}>
+					<Panel.Heading>
+						{this.getHeader(restaurant)}
+					</Panel.Heading>
+					<Panel.Collapse>
+						<Panel.Body>
+							{ menu ? this.getSections(main, others) : (<Loader />)}
+						</Panel.Body>
+					</Panel.Collapse>
 				</Panel>
 			</div>
 		);
@@ -58,7 +65,7 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 						onClick={() => this.toggle()}
 					/>
 					<Glyphicon title="Go to original page" glyph="link"
-						style={{cursor: "pointer", float: "right"}} 
+						style={{cursor: "pointer", float: "right"}}
 						onClick={this.props.onPressLink}
 					/>
 				</div>
