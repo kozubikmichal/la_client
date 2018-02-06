@@ -6,11 +6,13 @@ import {
 } from "../components/BodySection"
 
 import DateManager from "../DateManager";
+import { IState } from "../IState";
 
 const createContainer = (dateManager: DateManager) => {
-	const mapStateToProps = (): IBodyDataProps => {
+	const mapStateToProps = (state: IState): IBodyDataProps => {
 		return {
-			isWeekend: dateManager.isWeekend()
+			isWeekend: dateManager.isWeekend(),
+			viewMode: state.viewMode
 		}
 	}
 	return connect(mapStateToProps, null)(BodySection);

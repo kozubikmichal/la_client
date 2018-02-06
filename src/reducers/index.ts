@@ -7,6 +7,7 @@ import { menus } from "./menus"
 import { refresher } from "./refresher"
 import { settings } from "./settings"
 import { newFeatures } from "./news"
+import { mode } from "./mode"
 
 const reducers = combineReducers<IState>({
 	restaurants: restaurants,
@@ -14,7 +15,8 @@ const reducers = combineReducers<IState>({
 	loadedRestaurants: loadedRestaurants,
 	showSettings: settings,
 	newFeatures: newFeatures,
-	refresher
+	refresher,
+	viewMode: mode
 });
 
 export default reducers;

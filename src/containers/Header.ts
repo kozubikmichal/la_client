@@ -7,7 +7,9 @@ import {
 } from "../components/Header"
 
 import { IState } from "../IState";
+import { ViewMode } from "../ViewMode";
 import { openSettings } from "../actions/settings";
+import { switchMode } from "../actions/mode";
 
 interface IHeaderProps {
 	title?: string,
@@ -18,7 +20,8 @@ const mapStateToProps = (state: IState, ownProps: IHeaderProps): IHeaderDataProp
 	return {
 		title: ownProps.title,
 		day: ownProps.day,
-		showSettings: state.showSettings
+		showSettings: state.showSettings,
+		viewMode: state.viewMode
 	};
 }
 
@@ -26,6 +29,9 @@ const mapDispatchToProps = (dispatch: Function): IHeaderCallbackProps => {
 	return {
 		openSettings: () => {
 			dispatch(openSettings())
+		},
+		switchMode: (mode: ViewMode) => {
+			dispatch(switchMode(mode))
 		}
 	}
 }

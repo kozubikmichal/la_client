@@ -1,5 +1,7 @@
 import * as React from "react";
-import { PageHeader, Col, Glyphicon, Button, Tooltip, Popover } from "react-bootstrap";
+import { ViewMode } from "../ViewMode";
+import { PageHeader, Col, Glyphicon, Button, Tooltip, Popover,
+	ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
 import DateManager from "../DateManager";
 
@@ -10,11 +12,13 @@ interface IState {
 export interface IHeaderDataProps {
 	title?: string;
 	day?: number,
-	showSettings: boolean
+	showSettings: boolean,
+	viewMode: ViewMode
 }
 
 export interface IHeaderCallbackProps {
-	openSettings: () => void
+	openSettings: () => void,
+	switchMode: (mode: ViewMode) => void
 }
 
 export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackProps, {}> {
@@ -35,7 +39,7 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 		let now = this.state.now || this.dateManager.getToday();
 		let settings = this.props.showSettings;
 		let day = this.props.day !== undefined ? this.props.day : this.dateManager.getCurrentDay();
-		
+
 		return (
 			<Col lg={12}>
 				<PageHeader>
@@ -54,6 +58,13 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 							onClick={this.props.openSettings}
 						>
 						</Glyphicon>
+
+						<ToggleButtonGroup value={this.props.viewMode}
+							onChange={(e) => this.props.switchMode(e as any)}
+							type="radio" name="panelsMapSwitch">
+							<ToggleButton value={ViewMode.Panels}>Panels</ToggleButton>
+							<ToggleButton value={ViewMode.Map}>Map</ToggleButton>
+						</ToggleButtonGroup>
 					</span>
 				</PageHeader>
 			</Col>

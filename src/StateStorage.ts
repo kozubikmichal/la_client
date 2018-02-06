@@ -1,4 +1,5 @@
 import { IState } from "./IState";
+import { ViewMode } from "./ViewMode";
 import { Store } from "redux";
 
 export default class StateStorage {
@@ -15,7 +16,8 @@ export default class StateStorage {
 			elementId: "settings",
 			shown: false,
 			dateAdded: (new Date(2017, 7, 1)).getTime()
-		}]
+		}],
+		viewMode: ViewMode.Panels
 	}
 
 	constructor(private key = "state") { }
@@ -45,7 +47,8 @@ export default class StateStorage {
 	private stateToPermaState(state: IState): any {
 		return {
 			restaurants: state.restaurants,
-			newFeatures: state.newFeatures
+			newFeatures: state.newFeatures,
+			viewMode: state.viewMode
 		}
 	}
 }

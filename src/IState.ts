@@ -1,5 +1,6 @@
 import IMenu from "./IMenu"
 import { IRestaurant } from "./IMenu"
+import { ViewMode } from "./ViewMode"
 
 export interface IRestaurants {
 	collapsed: Array<string>;
@@ -22,5 +23,6 @@ export interface IState {
 	menus: IMenus,
 	loadedRestaurants: IRestaurant[],
 	showSettings: boolean,
-	newFeatures: INewFeature[]
+	newFeatures: INewFeature[],
+	viewMode: ViewMode
 }
