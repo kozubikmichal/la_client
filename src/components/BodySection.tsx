@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ImagePlaceholder } from "./ImagePlaceholder"
 import PanelsContainer from "../containers/PanelsContainer"
+import MapContainer from "../containers/map/MapContainer"
 import { ViewMode } from "../ViewMode";
 
 export interface IBodyDataProps {
@@ -15,7 +16,7 @@ export class BodySection extends React.Component<IBodyDataProps, {}> {
 		) : this.props.viewMode === ViewMode.Panels ? (
 			<PanelsContainer />
 		) : (
-			<span>Map mode</span>
+			<MapContainer />
 		)
 	}
 }

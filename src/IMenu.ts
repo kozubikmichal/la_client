@@ -8,10 +8,17 @@ export interface IMenuSection {
 	meals: IMeal[]
 }
 
+interface IPosition {
+	lat: string;
+	lng: string;
+}
+
 export interface IRestaurant {
 	id: string;
 	name: string;
 	url: string;
+	position: IPosition;
+
 }
 
 interface IMenu {

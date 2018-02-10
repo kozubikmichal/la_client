@@ -18,5 +18,12 @@ export default {
 
 	NewFeature_Close: "NewFeature_Close",
 
-	Mode_Switch: "Mode_Switch"
+	Mode_Switch: "Mode_Switch",
+
+	Library_Load: "Library_Load",
+	Library_Load_Success: "Library_Load_Success",
+	Library_Load_Failure: "Library_Load_Failure",
+
+
+	Map_ActivateMarker: "Map_ActivateMarker"
 }

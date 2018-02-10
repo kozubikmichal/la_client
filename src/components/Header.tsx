@@ -61,7 +61,10 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 
 						<ToggleButtonGroup value={this.props.viewMode}
 							onChange={(e) => this.props.switchMode(e as any)}
-							type="radio" name="panelsMapSwitch">
+							type="radio" name="panelsMapSwitch"
+							style={{
+								marginLeft: "2rem"
+							}}>
 							<ToggleButton value={ViewMode.Panels}>Panels</ToggleButton>
 							<ToggleButton value={ViewMode.Map}>Map</ToggleButton>
 						</ToggleButtonGroup>

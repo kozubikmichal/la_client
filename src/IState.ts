@@ -18,11 +18,22 @@ export interface INewFeature {
 	dateAdded: number
 }
 
+export interface ILibraries {
+	[id: string]: any
+}
+
+export interface IMapState {
+	activeMarker: any,
+	activeRestaurant: IRestaurant
+}
+
 export interface IState {
 	restaurants: IRestaurants,
 	menus: IMenus,
 	loadedRestaurants: IRestaurant[],
 	showSettings: boolean,
 	newFeatures: INewFeature[],
-	viewMode: ViewMode
+	viewMode: ViewMode,
+	libraries: ILibraries,
+	map: IMapState
 }
