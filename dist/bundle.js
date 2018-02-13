@@ -33751,11 +33751,15 @@ class MapContainer extends React.Component {
     render() {
         let { google, restaurants } = this.props;
         return google ?
-            (React.createElement(Map_1.default, { google: google },
-                restaurants.map((restaurant) => {
-                    return (React.createElement(Marker_1.default, { restaurant: restaurant, key: restaurant.id }));
-                }),
-                React.createElement(InfoWindow_1.default, null)))
+            (React.createElement("div", { style: {
+                    width: "100%",
+                    height: "800px"
+                } },
+                React.createElement(Map_1.default, { google: google },
+                    restaurants.map((restaurant) => {
+                        return (React.createElement(Marker_1.default, { restaurant: restaurant, key: restaurant.id }));
+                    }),
+                    React.createElement(InfoWindow_1.default, null))))
             : (React.createElement(Loader_1.Loader, null));
     }
     ;
@@ -33789,10 +33793,6 @@ exports.default = Container;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(0);
-const mapStyles = {
-    width: "100%",
-    height: "500px"
-};
 class Map extends React.Component {
     constructor() {
         super(...arguments);
@@ -33807,7 +33807,10 @@ class Map extends React.Component {
         });
     }
     render() {
-        return (React.createElement("div", { ref: "map", style: mapStyles },
+        return (React.createElement("div", { ref: "map", style: {
+                width: "100%",
+                height: "100%"
+            } },
             "Loading Map...",
             this.renderChildren()));
     }

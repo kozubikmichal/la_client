@@ -27,13 +27,19 @@ export class MapContainer extends React.Component<IMapContainerDataProps & IMapC
 
 		return google ?
 			(
-				<Map google={google} >
-					{restaurants.map((restaurant) => {
-						return (<Marker restaurant={restaurant} key={restaurant.id} />)
-					})}
+				<div style={{
+						width: "100%",
+						height: "800px"
+					}}
+					>
+					<Map google={google} >
+						{restaurants.map((restaurant) => {
+							return (<Marker restaurant={restaurant} key={restaurant.id} />)
+						})}
 
-					<InfoWindow />
-				</Map>
+						<InfoWindow />
+					</Map>
+				</div>
 			)
 			: (<Loader />)
 	};

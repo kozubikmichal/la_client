@@ -11,11 +11,6 @@ interface IState {
 	map?: any
 }
 
-const mapStyles = {
-	width: "100%",
-	height: "500px"
-}
-
 export class Map extends React.Component<IMapDataProps, {}> {
 	static readonly SapLabsBrno = {
 		lat: 49.181168,
@@ -35,7 +30,10 @@ export class Map extends React.Component<IMapDataProps, {}> {
 
 	render() {
 		return (
-			<div ref="map" style={mapStyles}>
+			<div ref="map" style={{
+				width: "100%",
+				height: "100%"
+			}}>
 				Loading Map...
 
 				{this.renderChildren()}
