@@ -15,7 +15,7 @@ const createContainer = (dateManager: DateManager) => {
 			viewMode: state.viewMode
 		}
 	}
-	return connect(mapStateToProps, null)(BodySection);
+	return connect(mapStateToProps)(BodySection);
 }
 
 const BodySectionContainer = createContainer(new DateManager());

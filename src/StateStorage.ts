@@ -1,6 +1,5 @@
 import { IState } from "./IState";
 import { ViewMode } from "./ViewMode";
-import { Store } from "redux";
 
 export default class StateStorage {
 	private defaultState: IState = {
@@ -27,9 +26,9 @@ export default class StateStorage {
 
 	constructor(private key = "state") { }
 
-	public save(store: Store<IState>) {
+	public save(state: IState) {
 		if (this.isStorageSupported()) {
-			let permaState = this.stateToPermaState(store.getState());
+			let permaState = this.stateToPermaState(state);
 
 			window.localStorage.setItem(this.key, JSON.stringify(permaState));
 		}

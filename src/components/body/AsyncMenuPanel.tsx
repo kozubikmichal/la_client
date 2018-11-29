@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Panel, Table, Glyphicon, Row } from "react-bootstrap";
+import { Panel, Glyphicon, Row } from "react-bootstrap";
 import { Loader } from "../Loader"
 
 import IMenu from "../../IMenu";

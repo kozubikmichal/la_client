@@ -12,12 +12,12 @@ import StateStorage from "./StateStorage";
 
 let stateStorage = new StateStorage();
 
-let store = createStore<IState>(
+let store = createStore(
 	reducers,
 	stateStorage.load(),
 	applyMiddleware(thunkMiddleware));
 
-store.subscribe(() => stateStorage.save(store));
+store.subscribe(() => stateStorage.save(store.getState() as IState));
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -24,7 +24,7 @@ export class AsyncPanelsContainer extends React.Component<IAsyncPanelsContainerD
 		return restaurants.length ?
 			(<div>
 				{restaurants.map((restaurant) => {
-						return (<Panel restaurant={restaurant} key={restaurant.id} />);
+						return (<Panel restaurant={restaurant}  key={restaurant.id} />);
 					})
 					}
 			</div>)

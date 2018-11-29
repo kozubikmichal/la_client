@@ -1,5 +1,3 @@
-import DateManager from "./DateManager";
-
 export default class Refresher {
 	private isRunning = false;
 	private intervalInHours = 3;

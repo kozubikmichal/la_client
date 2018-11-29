@@ -8,7 +8,6 @@ import {
 
 import { IState } from "../IState";
 import { IRestaurant } from "../IMenu";
-import ApiWrapper from "../ApiWrapper";
 
 import { collapseRestaurant, expandRestaurant } from "../actions/restaurant";
 import { loadMenu } from "../actions/menu";

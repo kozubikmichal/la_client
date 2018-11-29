@@ -60,7 +60,7 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 						</Glyphicon>
 
 						<ToggleButtonGroup value={this.props.viewMode}
-							onChange={(e) => this.props.switchMode(e as any)}
+							onChange={(e: any) => this.props.switchMode(e as any)}
 							type="radio" name="panelsMapSwitch"
 							style={{
 								marginLeft: "2rem"
