@@ -2,9 +2,11 @@ import * as React from "react";
 import { Panel, Glyphicon, Row } from "react-bootstrap";
 import { Loader } from "../Loader"
 
-import IMenu from "../../IMenu";
+import IMenu, { MenuType } from "../../IMenu";
 import { IRestaurant, IMenuSection } from "../../IMenu";
 import { MenuSection } from "./MenuSection";
+
+import { PDFPreview } from "./PDFPreview";
 
 export interface IAsyncMenuPanelDataProps {
 	menu: IMenu,
@@ -29,6 +31,7 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 		let { restaurant, menu } = this.props;
 		let main = menu && menu.menus[0];
 		let others = menu && menu.menus.slice(1);
+		let isPDF = menu && menu.type === MenuType.PDF;
 
 		return (
 			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
@@ -38,7 +41,10 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 					</Panel.Heading>
 					<Panel.Collapse>
 						<Panel.Body>
-							{ menu ? this.getSections(main, others) : (<Loader />)}
+							{
+								isPDF ? (<PDFPreview restaurant={restaurant} pdfInfo={menu.pdfInfo} />) :
+								menu ? this.getSections(main, others) : (<Loader />)
+							}
 						</Panel.Body>
 					</Panel.Collapse>
 				</Panel>

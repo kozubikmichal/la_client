@@ -1,0 +1,121 @@
+import * as React from "react";
+
+//@ts-ignore
+import * as pdflib from "pdfjs-dist";
+import { IRestaurant, IPDFInfo } from "../../IMenu";
+import { Loader } from "../Loader";
+import { Modal } from "react-bootstrap";
+
+export interface IPDFPreviewDataProps {
+	restaurant: IRestaurant,
+	pdfInfo: IPDFInfo
+}
+
+interface IState {
+	loaded: boolean,
+	fullscreen: boolean,
+	page: any
+}
+
+export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
+	static ScalePreview = 0.75;
+	static ScaleFullscreen = 1.5;
+
+	state: IState = {
+		loaded: false,
+		fullscreen: false,
+		page: null
+	}
+
+	get PreviewCanvasId(): string {
+		return `canvas-pdf-${this.props.restaurant.id}`
+	}
+
+	get FullscreenCanvasId(): string {
+		return `${this.PreviewCanvasId}-fullscreen`
+	}
+
+	async componentDidMount() {
+		if (this.state.loaded) {
+			return;
+		}
+		let page = await this.loadPDF(this.props.pdfInfo);
+
+		this.renderPage(this.PreviewCanvasId, PDFPreview.ScalePreview, page);
+	}
+
+	render() {
+		let { restaurant } = this.props;
+		let { loaded, fullscreen } = this.state;
+
+		return (
+			<div style={{overflow: "hidden"}}>
+				<a onClick={() => this.onPressPreview()} style={{ cursor: "pointer" }}>
+					<canvas id={this.PreviewCanvasId} hidden={ !loaded }></canvas>
+				</a>
+				<div hidden={loaded}>
+					<Loader />
+				</div>
+
+				<Modal
+					show={fullscreen}
+					onHide={() => this.cancel()}
+					onShow={() => this.showFullscreen()}
+					className="modal-fullscreen">
+					<Modal.Header closeButton>
+						<Modal.Title>{restaurant.name}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body >
+						<canvas id={this.FullscreenCanvasId} hidden={ !loaded }></canvas>
+					</Modal.Body>
+				</Modal>
+			</div>
+		);
+	}
+
+	private loadPDF(pdfInfo: IPDFInfo): Promise<any> {
+		let corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`
+
+		pdflib.GlobalWorkerOptions.workerSrc = "../dist/pdf.worker.bundle.js";
+		return pdflib.getDocument(corsAwareUrl).then((pdf: any) => {
+			return pdf.getPage(pdfInfo.pages[0]).then((page: any) => {
+				this.setState({
+					loaded: true,
+					page: page
+				});
+
+				return page;
+			})
+		});
+	}
+
+	private renderPage(canvasId: string, scale: number, page: any) {
+		let viewport = page.getViewport(scale);
+		let canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+		let context = canvas.getContext("2d");
+
+		canvas.height = viewport.height;
+		canvas.width = viewport.width;
+
+		page.render({
+			canvasContext: context,
+			viewport: viewport
+		});
+	}
+
+	private showFullscreen() {
+		this.renderPage(this.FullscreenCanvasId, PDFPreview.ScaleFullscreen, this.state.page);
+	}
+
+	private onPressPreview() {
+		this.setState({
+			fullscreen: true
+		})
+	}
+
+	private cancel() {
+		this.setState({
+			fullscreen: false
+		})
+	}
+}

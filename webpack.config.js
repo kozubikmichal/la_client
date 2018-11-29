@@ -1,8 +1,11 @@
 module.exports = {
 	mode: "development",
-	entry: "./src/index.tsx",
+	entry: {
+		"main": "./src/index.tsx",
+		"pdf.worker": "pdfjs-dist/build/pdf.worker.entry"
+	},
 	output: {
-		filename: "bundle.js",
+		filename: "[name].bundle.js",
 		path: __dirname + "/dist"
 	},
 

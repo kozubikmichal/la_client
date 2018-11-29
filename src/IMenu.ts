@@ -18,12 +18,23 @@ export interface IRestaurant {
 	name: string;
 	url: string;
 	position: IPosition;
+}
 
+export enum MenuType {
+	Standard,
+	PDF
+}
+
+export interface IPDFInfo {
+	url: string;
+	pages: number[]
 }
 
 interface IMenu {
 	restaurant: IRestaurant;
-	menus: IMenuSection[]
+	menus: IMenuSection[],
+	type: MenuType;
+	pdfInfo?: IPDFInfo;
 }
 
 export default IMenu;
