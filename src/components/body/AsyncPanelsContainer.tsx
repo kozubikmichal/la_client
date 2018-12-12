@@ -4,6 +4,7 @@ import Panel from "../../containers/Panel"
 import { Loader } from "../Loader"
 
 import { IRestaurant } from "../../IMenu";
+import { CardColumns } from "reactstrap";
 
 export interface IAsyncPanelsContainerDataProps {
 	restaurants: IRestaurant[]
@@ -22,12 +23,12 @@ export class AsyncPanelsContainer extends React.Component<IAsyncPanelsContainerD
 		let { restaurants }  = this.props;
 
 		return restaurants.length ?
-			(<div>
+			(<CardColumns className="m-3">
 				{restaurants.map((restaurant) => {
 						return (<Panel restaurant={restaurant}  key={restaurant.id} />);
 					})
 					}
-			</div>)
+			</CardColumns>)
 			: (<Loader />)
 	};
 }

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ViewMode } from "../ViewMode";
-import { PageHeader, Col, Glyphicon, Button, Tooltip, Popover,
-	ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+import Octicon, {Gear} from "@githubprimer/octicons-react";
 
 import DateManager from "../DateManager";
 
@@ -37,40 +36,35 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 
 	render() {
 		let now = this.state.now || this.dateManager.getToday();
-		let settings = this.props.showSettings;
-		let day = this.props.day !== undefined ? this.props.day : this.dateManager.getCurrentDay();
 
 		return (
-			<Col lg={12}>
-				<PageHeader>
-					<span>
-						{this.props.title}&nbsp;
-						<small>
-							{this.dateManager.getDayName(day)} {this.dateManager.getDateForWeekDay(day).toLocaleDateString()}
-						</small>
-						&nbsp;
-						<span style={{float: "right"}}>
-							{now.toLocaleTimeString()}
-						</span>
-						<Glyphicon glyph="cog" color="black" title="Settings" id="settings"
-							style={{ fontSize: "1.5rem", color: "black", cursor: "pointer"
-							}}
-							onClick={this.props.openSettings}
-						>
-						</Glyphicon>
+			<div className="d-flex sticky-top pb-1 pt-1 header align-items-center">
+				<div className="p-2 ml-2">
+					<img src="/public/img/logo_32x32_white.png" />
+				</div>
+				<div className="p-2">
+					<h3 style={{display: "inline", marginRight: "1rem"}}>{this.props.title}</h3>
+				</div>
+				<div className="mr-auto p-2">
+					by&nbsp;<a style={{color: "khaki", fontWeight: "bold"}} href="https://people.wdf.sap.corp/profiles/I336114" target="_blank">Michal Kozubík</a>
+				</div>
 
-						<ToggleButtonGroup value={this.props.viewMode}
-							onChange={(e: any) => this.props.switchMode(e as any)}
-							type="radio" name="panelsMapSwitch"
-							style={{
-								marginLeft: "2rem"
-							}}>
-							<ToggleButton value={ViewMode.Panels}>Panels</ToggleButton>
-							<ToggleButton value={ViewMode.Map}>Map</ToggleButton>
-						</ToggleButtonGroup>
-					</span>
-				</PageHeader>
-			</Col>
+				<div className="p-2">
+					<h4 style={{display: "inline"}}>
+						{now.toLocaleTimeString()}
+					</h4>
+				</div>
+
+				<div className="p-2 align-middle">
+					<a
+						href="#"
+						style={{verticalAlign: "text-top", color: "white"}}
+						onClick={this.props.openSettings}
+						title="Settings">
+						<Octicon icon={Gear} width={18} />
+					</a>
+				</div>
+			</div>
 		);
 	}
 

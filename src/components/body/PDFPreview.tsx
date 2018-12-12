@@ -4,7 +4,7 @@ import * as React from "react";
 import * as pdflib from "pdfjs-dist";
 import { IRestaurant, IPDFInfo } from "../../IMenu";
 import { Loader } from "../Loader";
-import { Modal } from "react-bootstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 export interface IPDFPreviewDataProps {
 	restaurant: IRestaurant,
@@ -58,16 +58,17 @@ export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
 				</div>
 
 				<Modal
-					show={fullscreen}
-					onHide={() => this.cancel()}
-					onShow={() => this.showFullscreen()}
+					toggle={() => this.cancel()}
+					isOpen={fullscreen}
+					onClosed={() => this.cancel()}
+					onOpened={() => this.showFullscreen()}
 					className="modal-fullscreen">
-					<Modal.Header closeButton>
-						<Modal.Title>{restaurant.name}</Modal.Title>
-					</Modal.Header>
-					<Modal.Body >
+					<ModalHeader toggle={() => this.cancel()}>
+						{restaurant.name}
+					</ModalHeader>
+					<ModalBody >
 						<canvas id={this.FullscreenCanvasId} hidden={ !loaded }></canvas>
-					</Modal.Body>
+					</ModalBody>
 				</Modal>
 			</div>
 		);

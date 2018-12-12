@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Panel, Glyphicon, Row } from "react-bootstrap";
+import { Card, Row, Collapse, Col } from "reactstrap";
+import Octicon, { Link, ChevronDown, ChevronUp, LinkExternal } from "@githubprimer/octicons-react";
 import { Loader } from "../Loader"
 
 import IMenu, { MenuType } from "../../IMenu";
@@ -7,6 +8,8 @@ import { IRestaurant, IMenuSection } from "../../IMenu";
 import { MenuSection } from "./MenuSection";
 
 import { PDFPreview } from "./PDFPreview";
+import CardBody from "reactstrap/lib/CardBody";
+import CardHeader from "reactstrap/lib/CardHeader";
 
 export interface IAsyncMenuPanelDataProps {
 	menu: IMenu,
@@ -34,21 +37,19 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 		let isPDF = menu && menu.type === MenuType.PDF;
 
 		return (
-			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				<Panel expanded={this.props.expanded} bsStyle="primary" onToggle={() => {}}>
-					<Panel.Heading>
-						{this.getHeader(restaurant)}
-					</Panel.Heading>
-					<Panel.Collapse>
-						<Panel.Body>
-							{
-								isPDF ? (<PDFPreview restaurant={restaurant} pdfInfo={menu.pdfInfo} />) :
-								menu ? this.getSections(main, others) : (<Loader />)
-							}
-						</Panel.Body>
-					</Panel.Collapse>
-				</Panel>
-			</div>
+			<Card>
+				<CardHeader>
+					{this.getHeader(restaurant)}
+				</CardHeader>
+				<Collapse isOpen={this.props.expanded}>
+					<CardBody>
+						{
+							isPDF ? (<PDFPreview restaurant={restaurant} pdfInfo={menu.pdfInfo} />) :
+							menu ? this.getSections(main, others) : (<Loader />)
+						}
+					</CardBody>
+				</Collapse>
+			</Card>
 		);
 	}
 
@@ -62,20 +63,31 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 	private getHeader(restaurant: IRestaurant): JSX.Element {
 		return (
 			<Row>
-				<div className="col-xs-9" onClick={() => this.toggle()} style={{cursor: "pointer"}}>
+				<Col xs={9} onClick={() => this.toggle()}
+					style={{cursor: "pointer"}}>
 					<strong>{restaurant.name}</strong>
-				</div>
-				<div className="col-xs-3">
-					<Glyphicon title={this.props.expanded ? "Collapse" : "Expand"} glyph={this.props.expanded ? "chevron-up" : "chevron-down"}
-						style={{cursor: "pointer", marginLeft: "10px", float: "right"}}
-						onClick={() => this.toggle()}
-					/>
-					<Glyphicon title="Go to original page" glyph="link"
-						style={{cursor: "pointer", float: "right"}}
-						onClick={this.props.onPressLink}
-					/>
-				</div>
+				</Col>
+				<Col xs={3}>
+					<a 	href="#"
+						style={anchorStyles}
+						title={this.props.expanded ? "Collapse" : "Expand"}
+						onClick={() => this.toggle()}>
+						<Octicon icon={this.props.expanded ? ChevronUp : ChevronDown} height={22}/>
+					</a>
+					<a 	href="#"
+						style={anchorStyles}
+						title="Go to original page"
+						onClick={this.props.onPressLink}>
+						<Octicon icon={LinkExternal} height={22}/>
+					</a>
+				</Col>
 			</Row>
 		)
 	}
+}
+
+const anchorStyles: React.CSSProperties = {
+	color: "white",
+	float: "right",
+	marginLeft: "10px"
 }

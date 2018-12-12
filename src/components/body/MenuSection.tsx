@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table } from "react-bootstrap";
+import { Table } from "reactstrap";
 
 import { IMenuSection } from "../../IMenu";
 
@@ -12,8 +12,8 @@ export class MenuSection extends React.Component<ISectionProps, {}> {
 		let section = this.props.section;
 
 		return (
-			<Table fill striped hover>
-				{ section.name && 
+			<Table hover striped>
+				{ section.name &&
 					<thead>
 						<tr><th>{section.name}</th></tr>
 					</thead>

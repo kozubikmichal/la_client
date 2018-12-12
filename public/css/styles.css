@@ -1,0 +1,99 @@
+html {
+	height: 100%;
+}
+
+body {
+	position: relative;
+	min-height: 100%;
+}
+
+.loader {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+html, body, #example {
+	height: 100%;
+	overflow: auto;
+}
+
+#example {
+	overflow: auto;
+	height: 100%;
+	background-color: aliceblue;
+}
+.footer {
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	padding: 0.25rem;
+	background-color: darkkhaki;
+	text-align: center;
+	font-weight: bold;
+}
+.modal-fullscreen {
+	display: table;
+}
+.card-columns {
+	column-count: 1
+}
+
+@media (min-width: 576px) {
+	.card-columns {
+		column-count: 2
+	}
+ }
+
+@media (min-width: 768px) {
+	.card-columns {
+		column-count: 3
+	}
+ }
+
+@media (min-width: 992px) {
+	.card-columns {
+		column-count: 4
+	}
+ }
+
+ .card-body {
+	 padding: 0;
+ }
+
+ .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+	background-color: white;
+ }
+
+ .table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+	background-color: #f7f7f7;
+ }
+
+ .card-body > table {
+	 margin-bottom: 0.1rem;
+ }
+
+ .card-header {
+	 background: #337ab7;
+	 color: white;
+	 padding: .5rem .75rem;
+ }
+
+ .card {
+	 border-color: #337ab7;
+ }
+
+ .header {
+	border-color: black!important;
+	background-color:lightslategray;
+	color: white;
+ }

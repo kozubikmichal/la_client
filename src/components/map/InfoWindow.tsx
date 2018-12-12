@@ -3,7 +3,8 @@ import { renderToString } from "react-dom/server";
 import IMenu, { IMenuSection, IRestaurant } from "../../IMenu";
 import { Loader } from "../Loader";
 import { MenuSection } from "../body/MenuSection";
-import { Row, Glyphicon } from "react-bootstrap";
+import { Row } from "reactstrap";
+import Octicon, {Link} from "@githubprimer/octicons-react";
 
 export interface IInfoWindowDataProps {
 	google?: any,
@@ -87,9 +88,10 @@ export class InfoWindow extends React.Component<IInfoWindowDataProps & IInfoWind
 					</div>
 					<div className="col-xs-3">
 						<a href={this.props.restaurant.url} target="_blank">
-							<Glyphicon title="Go to original page" glyph="link"
+							{/* <Glyphicon title="Go to original page" glyph="link"
 								style={{cursor: "pointer", float: "right"}}
-							/>
+							/> */}
+							<Octicon icon={Link} ></Octicon>
 						</a>
 					</div>
 				</Row>

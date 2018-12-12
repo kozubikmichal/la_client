@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import { Popover } from "react-bootstrap"
-
 import { INewFeature } from "../IState";
 import NewsItem from "../containers/NewsItem";
 

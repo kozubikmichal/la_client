@@ -11,12 +11,19 @@ export interface IBodyDataProps {
 
 export class BodySection extends React.Component<IBodyDataProps, {}> {
 	render() {
+
+		return this.props.isWeekend ? (
+			<ImagePlaceholder path="/public/img/weekend.jpg" />
+		) : (
+			<PanelsContainer />
+		)
+		/* Map not implemented in v2
 		return this.props.isWeekend ? (
 			<ImagePlaceholder path="/public/img/weekend.jpg" />
 		) : this.props.viewMode === ViewMode.Panels ? (
 			<PanelsContainer />
 		) : (
 			<MapContainer />
-		)
+		) */
 	}
 }

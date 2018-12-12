@@ -16,7 +16,7 @@ export default class StateStorage {
 			shown: false,
 			dateAdded: (new Date(2017, 7, 1)).getTime()
 		}],
-		viewMode: ViewMode.Map,
+		viewMode: ViewMode.Panels,
 		libraries: {},
 		map: {
 			activeMarker: null,

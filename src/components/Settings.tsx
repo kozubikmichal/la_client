@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Button, Modal, Checkbox} from "react-bootstrap";
+import {Button, Modal, ModalFooter, ModalBody, ModalHeader, Input, Form, FormGroup, Label} from "reactstrap";
 import ISettings from "../ISettings";
 
 export interface ISettingsDataProps {
@@ -15,24 +15,33 @@ export interface ISettingsCallbackProps {
 export class Settings extends React.Component<ISettingsDataProps & ISettingsCallbackProps, {}> {
 	render() {
 		return (
-			<Modal show={this.props.show} onHide={this.props.cancel}>
-				<Modal.Header closeButton>
-					<Modal.Title>Settings</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<h4>Select visible restaurants:</h4>
-					<span style={{ fontSize: "1.5rem"}}>
-					{
-						this.props.config.restaurants.map((r, index) => 
-							(<Checkbox key={r.restaurant.id} defaultChecked={!r.hidden} onChange={(e) => this.onChange(e, index)} >{r.restaurant.name}</Checkbox>)
-						)
-					}
-					</span>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={() => this.save()} bsStyle="primary">Save</Button>
-					<Button onClick={this.props.cancel}>Cancel</Button>
-				</Modal.Footer>
+			<Modal isOpen={this.props.show} toggle={this.props.cancel}>
+				<ModalHeader toggle={this.props.cancel}>
+					Settings
+				</ModalHeader>
+				<ModalBody>
+					<h5>Select visible restaurants:</h5>
+					<Form>
+						{this.props.config.restaurants.map((r, index) =>
+							(
+								<FormGroup check key={r.restaurant.id}>
+									<Label check>
+										<Input type="checkbox"
+											key={r.restaurant.id}
+											defaultChecked={!r.hidden}
+											onChange={(e) => this.onChange(e, index)}
+											/>{' '}
+										{r.restaurant.name}
+									</Label>
+								</FormGroup>
+							)
+						)}
+					</Form>
+				</ModalBody>
+				<ModalFooter>
+					<Button onClick={() => this.save()} color="primary">Save</Button>
+					<Button onClick={this.props.cancel} color="secondary">Cancel</Button>
+				</ModalFooter>
 			</Modal>
 		);
 	}
