@@ -45,7 +45,7 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 				<div className="p-2">
 					<h3 style={{display: "inline", marginRight: "1rem"}}>{this.props.title}</h3>
 				</div>
-				<div className="mr-auto p-2">
+				<div className="mr-auto pt-2 pr-2 align-bottom">
 					by&nbsp;<a style={{color: "khaki", fontWeight: "bold"}} href="https://people.wdf.sap.corp/profiles/I336114" target="_blank">Michal Kozubík</a>
 				</div>
 

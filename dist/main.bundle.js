@@ -65654,7 +65654,7 @@ class Header extends React.Component {
                 React.createElement("img", { src: "/public/img/logo_32x32_white.png" })),
             React.createElement("div", { className: "p-2" },
                 React.createElement("h3", { style: { display: "inline", marginRight: "1rem" } }, this.props.title)),
-            React.createElement("div", { className: "mr-auto p-2" },
+            React.createElement("div", { className: "mr-auto pt-2 pr-2 align-bottom" },
                 "by\u00A0",
                 React.createElement("a", { style: { color: "khaki", fontWeight: "bold" }, href: "https://people.wdf.sap.corp/profiles/I336114", target: "_blank" }, "Michal Kozub\u00EDk")),
             React.createElement("div", { className: "p-2" },
