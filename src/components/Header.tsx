@@ -40,7 +40,7 @@ export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackPr
 		return (
 			<div className="d-flex sticky-top pb-1 pt-1 header align-items-center">
 				<div className="p-2 ml-2">
-					<img src="/public/img/logo_32x32_white.png" />
+					<img src="/public/img/logo_32x32_xmas.png" />
 				</div>
 				<div className="p-2">
 					<h3 style={{display: "inline", marginRight: "1rem"}}>{this.props.title}</h3>

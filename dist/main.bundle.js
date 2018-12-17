@@ -65242,6 +65242,67 @@ var MenuType;
 
 /***/ }),
 
+/***/ "./src/ScriptCache.ts":
+/*!****************************!*\
+  !*** ./src/ScriptCache.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class ScriptCache {
+    constructor() { }
+    load(scripts) {
+        return Promise.all(scripts.map(s => this.loadSrc(s)));
+    }
+    loadSrc(src) {
+        if (ScriptCache.loaded.indexOf(src) >= 0) {
+            return Promise.resolve(src);
+        }
+        else {
+            return this.scriptTag(src).then(() => {
+                ScriptCache.loaded.push(src);
+                return src;
+            });
+        }
+    }
+    scriptTag(src) {
+        return new Promise((resolve, reject) => {
+            let tag = this.createScriptTag();
+            tag.onload = () => resolve(src);
+            tag.onerror = (event) => reject(event);
+            if (src.search("callback=") >= 0) {
+                let cbName = this.generateCallbackName();
+                src = src.replace(/(callback=)[^\&]+/, `$1${cbName}`);
+                window[cbName] = tag.onload;
+            }
+            else {
+                tag.addEventListener("load", tag.onload);
+            }
+            tag.addEventListener("error", tag.onerror);
+            tag.src = src;
+            document.getElementsByTagName("body")[0].appendChild(tag);
+        });
+    }
+    createScriptTag() {
+        let tag = document.createElement("script");
+        tag.type = "text/javascript";
+        tag.async = false;
+        return tag;
+    }
+    generateCallbackName() {
+        return `scriptCacheLoaded${ScriptCache.counter++}`;
+    }
+}
+ScriptCache.loaded = [];
+ScriptCache.counter = 0;
+exports.default = ScriptCache;
+
+
+/***/ }),
+
 /***/ "./src/StateStorage.ts":
 /*!*****************************!*\
   !*** ./src/StateStorage.ts ***!
@@ -65356,6 +65417,46 @@ exports.default = {
     Library_Load_Failure: "Library_Load_Failure",
     Map_ActivateMarker: "Map_ActivateMarker"
 };
+
+
+/***/ }),
+
+/***/ "./src/actions/libraries.ts":
+/*!**********************************!*\
+  !*** ./src/actions/libraries.ts ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const actionTypes_1 = __webpack_require__(/*! ./actionTypes */ "./src/actions/actionTypes.ts");
+const ScriptCache_1 = __webpack_require__(/*! ../ScriptCache */ "./src/ScriptCache.ts");
+const createLoadLibrary = (cache) => {
+    return (paths, id) => (dispatch) => {
+        return cache.load(paths).then(() => {
+            dispatch(loadLibrarySuccess(id));
+        }).catch(() => {
+            dispatch(loadLibraryFailure(id));
+        });
+    };
+};
+exports.loadLibrary = createLoadLibrary(new ScriptCache_1.default());
+function loadLibrarySuccess(id) {
+    return {
+        type: actionTypes_1.default.Library_Load_Success,
+        payload: id
+    };
+}
+exports.loadLibrarySuccess = loadLibrarySuccess;
+function loadLibraryFailure(id) {
+    return {
+        type: actionTypes_1.default.Library_Load_Failure,
+        payload: id
+    };
+}
+exports.loadLibraryFailure = loadLibraryFailure;
 
 
 /***/ }),
@@ -65572,6 +65673,7 @@ const Header_1 = __webpack_require__(/*! ../containers/Header */ "./src/containe
 const BodySection_1 = __webpack_require__(/*! ../containers/BodySection */ "./src/containers/BodySection.ts");
 const Settings_1 = __webpack_require__(/*! ../containers/Settings */ "./src/containers/Settings.ts");
 const News_1 = __webpack_require__(/*! ../containers/News */ "./src/containers/News.ts");
+const Snow_1 = __webpack_require__(/*! ../containers/Snow */ "./src/containers/Snow.ts");
 class App extends React.Component {
     componentDidMount() {
         this.props.onDidMount();
@@ -65581,7 +65683,8 @@ class App extends React.Component {
             React.createElement(Header_1.default, { title: "Lunch Aggregator" }),
             React.createElement(BodySection_1.default, null),
             React.createElement(Settings_1.default, null),
-            React.createElement(News_1.default, null)));
+            React.createElement(News_1.default, null),
+            React.createElement(Snow_1.default, null)));
     }
 }
 exports.App = App;
@@ -65651,7 +65754,7 @@ class Header extends React.Component {
         let now = this.state.now || this.dateManager.getToday();
         return (React.createElement("div", { className: "d-flex sticky-top pb-1 pt-1 header align-items-center" },
             React.createElement("div", { className: "p-2 ml-2" },
-                React.createElement("img", { src: "/public/img/logo_32x32_white.png" })),
+                React.createElement("img", { src: "/public/img/logo_32x32_xmas.png" })),
             React.createElement("div", { className: "p-2" },
                 React.createElement("h3", { style: { display: "inline", marginRight: "1rem" } }, this.props.title)),
             React.createElement("div", { className: "mr-auto pt-2 pr-2 align-bottom" },
@@ -65815,6 +65918,37 @@ class Settings extends React.Component {
     }
 }
 exports.Settings = Settings;
+
+
+/***/ }),
+
+/***/ "./src/components/Snow.tsx":
+/*!*********************************!*\
+  !*** ./src/components/Snow.tsx ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+class Snow extends React.Component {
+    componentDidMount() {
+        this.props.loadSnowfallApi();
+    }
+    render() {
+        if (this.props.snowFall) {
+            this.props.snowFall.snow([document.body], {
+                image: "/public/img/flake_g.png",
+                minSize: 7,
+                maxSize: 25
+            });
+        }
+        return false;
+    }
+}
+exports.Snow = Snow;
 
 
 /***/ }),
@@ -66316,6 +66450,38 @@ const mapDispatchToProps = (dispatch) => {
 };
 const SettingsContainer = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Settings_1.Settings);
 exports.default = SettingsContainer;
+
+
+/***/ }),
+
+/***/ "./src/containers/Snow.ts":
+/*!********************************!*\
+  !*** ./src/containers/Snow.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const libraries_1 = __webpack_require__(/*! ../actions/libraries */ "./src/actions/libraries.ts");
+const Snow_1 = __webpack_require__(/*! ../components/Snow */ "./src/components/Snow.tsx");
+const SCRIPT_SOURCE = `https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.7.4/snowfall.min.js`;
+const mapStateToProps = (state) => {
+    return {
+        snowFall: state.libraries.snowFall
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadSnowfallApi: () => {
+            dispatch(libraries_1.loadLibrary([SCRIPT_SOURCE], "snowFall"));
+        }
+    };
+};
+const Container = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Snow_1.Snow);
+exports.default = Container;
 
 
 /***/ }),
