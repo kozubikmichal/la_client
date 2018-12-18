@@ -29,9 +29,27 @@ export class Settings extends React.Component<ISettingsDataProps & ISettingsCall
 										<Input type="checkbox"
 											key={r.restaurant.id}
 											defaultChecked={!r.hidden}
-											onChange={(e) => this.onChange(e, index)}
+											onChange={(e) => this.onRestaurantChange(e, index)}
 											/>{' '}
 										{r.restaurant.name}
+									</Label>
+								</FormGroup>
+							)
+						)}
+					</Form>
+					<br />
+					<h5>Effects</h5>
+					<Form>
+						{this.props.config.effects.map((effect, index) =>
+							(
+								<FormGroup check key={effect.id}>
+									<Label check>
+										<Input type="checkbox"
+											key={effect.id}
+											defaultChecked={!effect.disabled}
+											onChange={(e) => this.onEffectChange(e, index)}
+											/>{' '}
+										{effect.name}
 									</Label>
 								</FormGroup>
 							)
@@ -50,7 +68,11 @@ export class Settings extends React.Component<ISettingsDataProps & ISettingsCall
 		this.props.save(this.props.config);
 	}
 
-	private onChange(event: any, index: number) {
+	private onRestaurantChange(event: any, index: number) {
 		this.props.config.restaurants[index].hidden = !event.target.checked;
+	}
+
+	private onEffectChange(event: any, index: number) {
+		this.props.config.effects[index].disabled = !event.target.checked;
 	}
 }

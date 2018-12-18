@@ -65336,7 +65336,8 @@ class StateStorage {
             map: {
                 activeMarker: null,
                 activeRestaurant: null
-            }
+            },
+            effects: []
         };
     }
     save(state) {
@@ -65359,7 +65360,8 @@ class StateStorage {
         return {
             restaurants: state.restaurants,
             newFeatures: state.newFeatures,
-            viewMode: state.viewMode
+            viewMode: state.viewMode,
+            effects: state.effects
         };
     }
 }
@@ -65903,9 +65905,16 @@ class Settings extends React.Component {
                 React.createElement("h5", null, "Select visible restaurants:"),
                 React.createElement(reactstrap_1.Form, null, this.props.config.restaurants.map((r, index) => (React.createElement(reactstrap_1.FormGroup, { check: true, key: r.restaurant.id },
                     React.createElement(reactstrap_1.Label, { check: true },
-                        React.createElement(reactstrap_1.Input, { type: "checkbox", key: r.restaurant.id, defaultChecked: !r.hidden, onChange: (e) => this.onChange(e, index) }),
+                        React.createElement(reactstrap_1.Input, { type: "checkbox", key: r.restaurant.id, defaultChecked: !r.hidden, onChange: (e) => this.onRestaurantChange(e, index) }),
                         ' ',
-                        r.restaurant.name)))))),
+                        r.restaurant.name))))),
+                React.createElement("br", null),
+                React.createElement("h5", null, "Effects"),
+                React.createElement(reactstrap_1.Form, null, this.props.config.effects.map((effect, index) => (React.createElement(reactstrap_1.FormGroup, { check: true, key: effect.id },
+                    React.createElement(reactstrap_1.Label, { check: true },
+                        React.createElement(reactstrap_1.Input, { type: "checkbox", key: effect.id, defaultChecked: !effect.disabled, onChange: (e) => this.onEffectChange(e, index) }),
+                        ' ',
+                        effect.name)))))),
             React.createElement(reactstrap_1.ModalFooter, null,
                 React.createElement(reactstrap_1.Button, { onClick: () => this.save(), color: "primary" }, "Save"),
                 React.createElement(reactstrap_1.Button, { onClick: this.props.cancel, color: "secondary" }, "Cancel"))));
@@ -65913,8 +65922,11 @@ class Settings extends React.Component {
     save() {
         this.props.save(this.props.config);
     }
-    onChange(event, index) {
+    onRestaurantChange(event, index) {
         this.props.config.restaurants[index].hidden = !event.target.checked;
+    }
+    onEffectChange(event, index) {
+        this.props.config.effects[index].disabled = !event.target.checked;
     }
 }
 exports.Settings = Settings;
@@ -65938,12 +65950,18 @@ class Snow extends React.Component {
         this.props.loadSnowfallApi();
     }
     render() {
-        if (this.props.snowFall) {
+        if (!this.props.snowFall) {
+            return false;
+        }
+        if (this.props.enabled) {
             this.props.snowFall.snow([document.body], {
                 image: "/public/img/flake_g.png",
                 minSize: 7,
                 maxSize: 25
             });
+        }
+        else {
+            this.props.snowFall.snow([document.body], "clear");
         }
         return false;
     }
@@ -66434,6 +66452,14 @@ const mapStateToProps = (state) => {
                     restaurant: r,
                     hidden: state.restaurants.hidden.indexOf(r.id) !== -1
                 };
+            }),
+            effects: [{
+                    id: "snowFall",
+                    name: "Snow",
+                    disabled: false
+                }].map(effect => {
+                effect.disabled = state.effects.some(e => e.id === effect.id && e.disabled);
+                return effect;
             })
         }
     };
@@ -66470,7 +66496,8 @@ const Snow_1 = __webpack_require__(/*! ../components/Snow */ "./src/components/S
 const SCRIPT_SOURCE = `https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.7.4/snowfall.min.js`;
 const mapStateToProps = (state) => {
     return {
-        snowFall: state.libraries.snowFall
+        snowFall: state.libraries.snowFall,
+        enabled: !state.effects.some(e => e.id === "snowFall" && e.disabled)
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -66513,6 +66540,32 @@ ReactDOM.render(React.createElement(react_redux_1.Provider, { store: store },
 
 /***/ }),
 
+/***/ "./src/reducers/effects.ts":
+/*!*********************************!*\
+  !*** ./src/reducers/effects.ts ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const actionTypes_1 = __webpack_require__(/*! ../actions/actionTypes */ "./src/actions/actionTypes.ts");
+const defaultState = [];
+function effects(state = defaultState, action) {
+    switch (action.type) {
+        case actionTypes_1.default.Settings_Save: {
+            let settings = action.payload;
+            return settings.effects.slice();
+        }
+    }
+    return state;
+}
+exports.effects = effects;
+
+
+/***/ }),
+
 /***/ "./src/reducers/index.ts":
 /*!*******************************!*\
   !*** ./src/reducers/index.ts ***!
@@ -66532,6 +66585,7 @@ const news_1 = __webpack_require__(/*! ./news */ "./src/reducers/news.ts");
 const mode_1 = __webpack_require__(/*! ./mode */ "./src/reducers/mode.ts");
 const libraries_1 = __webpack_require__(/*! ./libraries */ "./src/reducers/libraries.ts");
 const map_1 = __webpack_require__(/*! ./map */ "./src/reducers/map.ts");
+const effects_1 = __webpack_require__(/*! ./effects */ "./src/reducers/effects.ts");
 const reducers = redux_1.combineReducers({
     restaurants: restaurants_1.restaurants,
     menus: menus_1.menus,
@@ -66540,7 +66594,8 @@ const reducers = redux_1.combineReducers({
     newFeatures: news_1.newFeatures,
     viewMode: mode_1.mode,
     libraries: libraries_1.libraries,
-    map: map_1.map
+    map: map_1.map,
+    effects: effects_1.effects
 });
 exports.default = reducers;
 

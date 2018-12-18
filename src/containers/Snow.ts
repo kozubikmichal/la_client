@@ -13,7 +13,8 @@ const SCRIPT_SOURCE = `https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.
 
 const mapStateToProps = (state: IState): ISnowDataProps => {
 	return {
-		snowFall: state.libraries.snowFall
+		snowFall: state.libraries.snowFall,
+		enabled: !state.effects.some(e => e.id === "snowFall" && e.disabled)
 	};
 }
 

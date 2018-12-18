@@ -21,7 +21,8 @@ export default class StateStorage {
 		map: {
 			activeMarker: null,
 			activeRestaurant: null
-		}
+		},
+		effects: []
 	}
 
 	constructor(private key = "state") { }
@@ -52,7 +53,8 @@ export default class StateStorage {
 		return {
 			restaurants: state.restaurants,
 			newFeatures: state.newFeatures,
-			viewMode: state.viewMode
+			viewMode: state.viewMode,
+			effects: state.effects
 		}
 	}
 }

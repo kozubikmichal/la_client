@@ -8,6 +8,7 @@ import { newFeatures } from "./news"
 import { mode } from "./mode"
 import { libraries } from "./libraries"
 import { map } from "./map"
+import { effects } from "./effects";
 
 const reducers = combineReducers({
 	restaurants: restaurants,
@@ -17,7 +18,8 @@ const reducers = combineReducers({
 	newFeatures: newFeatures,
 	viewMode: mode,
 	libraries: libraries,
-	map: map
+	map: map,
+	effects: effects
 });
 
 export default reducers;

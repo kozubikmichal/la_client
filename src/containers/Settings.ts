@@ -19,6 +19,14 @@ const mapStateToProps = (state: IState): ISettingsDataProps => {
 					restaurant: r,
 					hidden: state.restaurants.hidden.indexOf(r.id) !== -1
 				}
+			}),
+			effects: [{
+				id: "snowFall",
+				name: "Snow",
+				disabled: false
+			}].map(effect => {
+				effect.disabled = state.effects.some(e => e.id === effect.id && e.disabled);
+				return effect;
 			})
 		}
 	};

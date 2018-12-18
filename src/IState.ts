@@ -7,6 +7,11 @@ export interface IRestaurants {
 	hidden: Array<string>;
 }
 
+export interface IEffect {
+	id: string;
+	disabled: boolean;
+}
+
 export interface IMenus {
 	[id: string]: IMenu
 }
@@ -35,5 +40,6 @@ export interface IState {
 	newFeatures: INewFeature[],
 	viewMode: ViewMode,
 	libraries: ILibraries,
-	map: IMapState
+	map: IMapState,
+	effects: IEffect[]
 }
