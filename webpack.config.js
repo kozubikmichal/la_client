@@ -24,6 +24,7 @@ module.exports = {
 		},
 		proxy: {
 			"/api/*": {
+				//target: "http://localhost:3333"
 				target: "http://prototypes.brq.only.sap:3333"
 			}
 		}

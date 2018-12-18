@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/css/styles.css">
+	<link rel="icon" href="/public/img/logo_32x32_xmas.png">
+
+	<title>Lunch aggregator - statistics</title>
+
+
+</head>
+
+<body>
+	<div style="height:400; width:400">
+		<canvas id="statsChart"></canvas>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+
+	<script>
+		(async function init() {
+			let response = await fetch("/api/stats/visitors");
+			let visitors = await response.json();
+			let context = document.getElementById("statsChart").getContext('2d');
+
+			new Chart(context, {
+				type: 'line',
+				data: {
+					datasets: [{
+						borderColor: '#337ab7',
+						fill: false,
+						lineTension: 0,
+						label: 'Visitors',
+						data: visitors.map(v => {
+							return {
+								x: new Date(v.datetime),
+								y: v.count
+							}
+						}),
+						type: 'line'
+					}]
+				},
+				options: {
+					layout: {
+						padding: {
+							left: 20,
+							right: 20,
+							top: 20
+						}
+					},
+					scales: {
+						xAxes: [{
+							type: 'time',
+							distribution: "series",
+							time: {
+								unit: "minute",
+								displayFormats: {
+									minute: "DD.MM HH:mm"
+								}
+							},
+							bounds: "data",
+							ticks: {
+								source: 'data'
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								callback: function (value) {
+									return Number(value) % 1 === 0 ? Number(value) : ""
+								}
+							}
+						}]
+					}
+				}
+			});
+		})();
+	</script>
+</body>
+
+</html>
