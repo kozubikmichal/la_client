@@ -23,7 +23,7 @@ const mapStateToProps = (state: IState): ISettingsDataProps => {
 			effects: [{
 				id: "snowFall",
 				name: "Snow",
-				disabled: false
+				disabled: true
 			}].map(effect => {
 				effect.disabled = state.effects.some(e => e.id === effect.id && e.disabled);
 				return effect;
