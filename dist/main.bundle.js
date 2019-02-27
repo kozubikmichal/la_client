@@ -65756,7 +65756,7 @@ class Header extends React.Component {
         let now = this.state.now || this.dateManager.getToday();
         return (React.createElement("div", { className: "d-flex sticky-top pb-1 pt-1 header align-items-center" },
             React.createElement("div", { className: "p-2 ml-2" },
-                React.createElement("img", { src: "/public/img/logo_32x32_xmas.png" })),
+                React.createElement("img", { src: "/public/img/logo_32x32_white.png" })),
             React.createElement("div", { className: "p-2" },
                 React.createElement("h3", { style: { display: "inline", marginRight: "1rem" } }, this.props.title)),
             React.createElement("div", { className: "mr-auto pt-2 pr-2 align-bottom" },
