@@ -9,6 +9,7 @@ import {
 
 import { IState } from "../IState";
 import { closeSettings, saveSettings } from "../actions/settings";
+import effectTypes from "../effects/effectTypes";
 
 const mapStateToProps = (state: IState): ISettingsDataProps => {
 	return {
@@ -21,9 +22,13 @@ const mapStateToProps = (state: IState): ISettingsDataProps => {
 				}
 			}),
 			effects: [{
-				id: "snowFall",
+				id: effectTypes.SnowFall,
 				name: "Snow",
 				disabled: true
+			}, {
+				id: effectTypes.WoWBanner,
+				name: "WoW Banner",
+				disabled: false
 			}].map(effect => {
 				effect.disabled = state.effects.some(e => e.id === effect.id && e.disabled);
 				return effect;

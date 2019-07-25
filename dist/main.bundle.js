@@ -61385,6 +61385,150 @@ var UncontrolledTooltip = function (_Component) {
 
 /***/ }),
 
+/***/ "./node_modules/reactstrap/lib/Button.js":
+/*!***********************************************!*\
+  !*** ./node_modules/reactstrap/lib/Button.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/reactstrap/lib/utils.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var propTypes = {
+  active: _propTypes2.default.bool,
+  'aria-label': _propTypes2.default.string,
+  block: _propTypes2.default.bool,
+  color: _propTypes2.default.string,
+  disabled: _propTypes2.default.bool,
+  outline: _propTypes2.default.bool,
+  tag: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.string]),
+  innerRef: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func, _propTypes2.default.string]),
+  onClick: _propTypes2.default.func,
+  size: _propTypes2.default.string,
+  children: _propTypes2.default.node,
+  className: _propTypes2.default.string,
+  cssModule: _propTypes2.default.object,
+  close: _propTypes2.default.bool
+};
+
+var defaultProps = {
+  color: 'secondary',
+  tag: 'button'
+};
+
+var Button = function (_React$Component) {
+  _inherits(Button, _React$Component);
+
+  function Button(props) {
+    _classCallCheck(this, Button);
+
+    var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+
+    _this.onClick = _this.onClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Button, [{
+    key: 'onClick',
+    value: function onClick(e) {
+      if (this.props.disabled) {
+        e.preventDefault();
+        return;
+      }
+
+      if (this.props.onClick) {
+        this.props.onClick(e);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          active = _props.active,
+          ariaLabel = _props['aria-label'],
+          block = _props.block,
+          className = _props.className,
+          close = _props.close,
+          cssModule = _props.cssModule,
+          color = _props.color,
+          outline = _props.outline,
+          size = _props.size,
+          Tag = _props.tag,
+          innerRef = _props.innerRef,
+          attributes = _objectWithoutProperties(_props, ['active', 'aria-label', 'block', 'className', 'close', 'cssModule', 'color', 'outline', 'size', 'tag', 'innerRef']);
+
+      if (close && typeof attributes.children === 'undefined') {
+        attributes.children = _react2.default.createElement(
+          'span',
+          { 'aria-hidden': true },
+          '\xD7'
+        );
+      }
+
+      var btnOutlineColor = 'btn' + (outline ? '-outline' : '') + '-' + color;
+
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, { close: close }, close || 'btn', close || btnOutlineColor, size ? 'btn-' + size : false, block ? 'btn-block' : false, { active: active, disabled: this.props.disabled }), cssModule);
+
+      if (attributes.href && Tag === 'button') {
+        Tag = 'a';
+      }
+
+      var defaultAriaLabel = close ? 'Close' : null;
+
+      return _react2.default.createElement(Tag, _extends({
+        type: Tag === 'button' && attributes.onClick ? 'button' : undefined
+      }, attributes, {
+        className: classes,
+        ref: innerRef,
+        onClick: this.onClick,
+        'aria-label': ariaLabel || defaultAriaLabel
+      }));
+    }
+  }]);
+
+  return Button;
+}(_react2.default.Component);
+
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
+
+exports.default = Button;
+
+/***/ }),
+
 /***/ "./node_modules/reactstrap/lib/CardBody.js":
 /*!*************************************************!*\
   !*** ./node_modules/reactstrap/lib/CardBody.js ***!
@@ -61506,6 +61650,199 @@ CardHeader.propTypes = propTypes;
 CardHeader.defaultProps = defaultProps;
 
 exports.default = CardHeader;
+
+/***/ }),
+
+/***/ "./node_modules/reactstrap/lib/Col.js":
+/*!********************************************!*\
+  !*** ./node_modules/reactstrap/lib/Col.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _lodash = __webpack_require__(/*! lodash.isobject */ "./node_modules/lodash.isobject/index.js");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/reactstrap/lib/utils.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
+var stringOrNumberProp = _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]);
+
+var columnProps = _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.number, _propTypes2.default.string, _propTypes2.default.shape({
+  size: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.number, _propTypes2.default.string]),
+  push: (0, _utils.deprecated)(stringOrNumberProp, 'Please use the prop "order"'),
+  pull: (0, _utils.deprecated)(stringOrNumberProp, 'Please use the prop "order"'),
+  order: stringOrNumberProp,
+  offset: stringOrNumberProp
+})]);
+
+var propTypes = {
+  tag: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.string]),
+  xs: columnProps,
+  sm: columnProps,
+  md: columnProps,
+  lg: columnProps,
+  xl: columnProps,
+  className: _propTypes2.default.string,
+  cssModule: _propTypes2.default.object,
+  widths: _propTypes2.default.array
+};
+
+var defaultProps = {
+  tag: 'div',
+  widths: colWidths
+};
+
+var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
+  if (colSize === true || colSize === '') {
+    return isXs ? 'col' : 'col-' + colWidth;
+  } else if (colSize === 'auto') {
+    return isXs ? 'col-auto' : 'col-' + colWidth + '-auto';
+  }
+
+  return isXs ? 'col-' + colSize : 'col-' + colWidth + '-' + colSize;
+};
+
+var Col = function Col(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      widths = props.widths,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'widths', 'tag']);
+
+  var colClasses = [];
+
+  widths.forEach(function (colWidth, i) {
+    var columnProp = props[colWidth];
+
+    delete attributes[colWidth];
+
+    if (!columnProp && columnProp !== '') {
+      return;
+    }
+
+    var isXs = !i;
+
+    if ((0, _lodash2.default)(columnProp)) {
+      var _classNames;
+
+      var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
+      var colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
+
+      colClasses.push((0, _utils.mapToCssModules)((0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, colClass, columnProp.size || columnProp.size === ''), _defineProperty(_classNames, 'order' + colSizeInterfix + columnProp.order, columnProp.order || columnProp.order === 0), _defineProperty(_classNames, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset || columnProp.offset === 0), _classNames)), cssModule));
+    } else {
+      var _colClass = getColumnSizeClass(isXs, colWidth, columnProp);
+      colClasses.push(_colClass);
+    }
+  });
+
+  if (!colClasses.length) {
+    colClasses.push('col');
+  }
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, colClasses), cssModule);
+
+  return _react2.default.createElement(Tag, _extends({}, attributes, { className: classes }));
+};
+
+Col.propTypes = propTypes;
+Col.defaultProps = defaultProps;
+
+exports.default = Col;
+
+/***/ }),
+
+/***/ "./node_modules/reactstrap/lib/Row.js":
+/*!********************************************!*\
+  !*** ./node_modules/reactstrap/lib/Row.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/reactstrap/lib/utils.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var propTypes = {
+  tag: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.string]),
+  noGutters: _propTypes2.default.bool,
+  className: _propTypes2.default.string,
+  cssModule: _propTypes2.default.object,
+  form: _propTypes2.default.bool
+};
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var Row = function Row(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      noGutters = props.noGutters,
+      Tag = props.tag,
+      form = props.form,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'noGutters', 'tag', 'form']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, noGutters ? 'no-gutters' : null, form ? 'form-row' : 'row'), cssModule);
+
+  return _react2.default.createElement(Tag, _extends({}, attributes, { className: classes }));
+};
+
+Row.propTypes = propTypes;
+Row.defaultProps = defaultProps;
+
+exports.default = Row;
 
 /***/ }),
 
@@ -65417,8 +65754,31 @@ exports.default = {
     Library_Load: "Library_Load",
     Library_Load_Success: "Library_Load_Success",
     Library_Load_Failure: "Library_Load_Failure",
-    Map_ActivateMarker: "Map_ActivateMarker"
+    Map_ActivateMarker: "Map_ActivateMarker",
+    Effect_Disable: "Effect_Disable"
 };
+
+
+/***/ }),
+
+/***/ "./src/actions/effect.ts":
+/*!*******************************!*\
+  !*** ./src/actions/effect.ts ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const actionTypes_1 = __webpack_require__(/*! ./actionTypes */ "./src/actions/actionTypes.ts");
+function disableEffect(effect) {
+    return {
+        type: actionTypes_1.default.Effect_Disable,
+        payload: effect
+    };
+}
+exports.disableEffect = disableEffect;
 
 
 /***/ }),
@@ -65524,28 +65884,6 @@ function switchMode(viewMode) {
     };
 }
 exports.switchMode = switchMode;
-
-
-/***/ }),
-
-/***/ "./src/actions/news.ts":
-/*!*****************************!*\
-  !*** ./src/actions/news.ts ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const actionTypes_1 = __webpack_require__(/*! ./actionTypes */ "./src/actions/actionTypes.ts");
-function markRead(feature) {
-    return {
-        type: actionTypes_1.default.NewFeature_Close,
-        payload: feature
-    };
-}
-exports.markRead = markRead;
 
 
 /***/ }),
@@ -65674,8 +66012,8 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const Header_1 = __webpack_require__(/*! ../containers/Header */ "./src/containers/Header.ts");
 const BodySection_1 = __webpack_require__(/*! ../containers/BodySection */ "./src/containers/BodySection.ts");
 const Settings_1 = __webpack_require__(/*! ../containers/Settings */ "./src/containers/Settings.ts");
-const News_1 = __webpack_require__(/*! ../containers/News */ "./src/containers/News.ts");
 const Snow_1 = __webpack_require__(/*! ../containers/Snow */ "./src/containers/Snow.ts");
+const WoWBanner_1 = __webpack_require__(/*! ../containers/WoWBanner */ "./src/containers/WoWBanner.ts");
 class App extends React.Component {
     componentDidMount() {
         this.props.onDidMount();
@@ -65684,8 +66022,8 @@ class App extends React.Component {
         return (React.createElement("div", null,
             React.createElement(Header_1.default, { title: "Lunch Aggregator" }),
             React.createElement(BodySection_1.default, null),
+            React.createElement(WoWBanner_1.default, null),
             React.createElement(Settings_1.default, null),
-            React.createElement(News_1.default, null),
             React.createElement(Snow_1.default, null)));
     }
 }
@@ -65824,67 +66162,6 @@ exports.Loader = Loader;
 
 /***/ }),
 
-/***/ "./src/components/News.tsx":
-/*!*********************************!*\
-  !*** ./src/components/News.tsx ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const NewsItem_1 = __webpack_require__(/*! ../containers/NewsItem */ "./src/containers/NewsItem.ts");
-class News extends React.Component {
-    render() {
-        return (React.createElement("div", null, this.props.news.map(n => this.getFeaturePopover(n))));
-    }
-    ;
-    getFeaturePopover(feature) {
-        let popoverId = `feature_${feature.elementId}`;
-        let popover = (React.createElement(NewsItem_1.default, { key: feature.elementId, id: popoverId, feature: feature }));
-        setTimeout(() => {
-            let element = document.getElementById(feature.elementId);
-            let popover = document.getElementById(popoverId);
-            popover.style.left = element.offsetLeft + element.offsetWidth + 10 + "px";
-            popover.style.top = element.offsetTop - element.clientHeight + "px";
-        });
-        return popover;
-    }
-}
-exports.News = News;
-
-
-/***/ }),
-
-/***/ "./src/components/NewsItem.tsx":
-/*!*************************************!*\
-  !*** ./src/components/NewsItem.tsx ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const reactstrap_1 = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
-const octicons_react_1 = __webpack_require__(/*! @githubprimer/octicons-react */ "./node_modules/@githubprimer/octicons-react/dist/index.esm.js");
-class NewsItem extends React.Component {
-    render() {
-        return (React.createElement(reactstrap_1.Popover, { id: this.props.id, style: { zIndex: 1 }, target: "" },
-            "New feature - ",
-            this.props.description,
-            React.createElement(octicons_react_1.default, { icon: octicons_react_1.X })));
-    }
-    ;
-}
-exports.NewsItem = NewsItem;
-
-
-/***/ }),
-
 /***/ "./src/components/Settings.tsx":
 /*!*************************************!*\
   !*** ./src/components/Settings.tsx ***!
@@ -65967,6 +66244,63 @@ class Snow extends React.Component {
     }
 }
 exports.Snow = Snow;
+
+
+/***/ }),
+
+/***/ "./src/components/WoWBanner.tsx":
+/*!**************************************!*\
+  !*** ./src/components/WoWBanner.tsx ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const Row_1 = __webpack_require__(/*! reactstrap/lib/Row */ "./node_modules/reactstrap/lib/Row.js");
+const Col_1 = __webpack_require__(/*! reactstrap/lib/Col */ "./node_modules/reactstrap/lib/Col.js");
+const Button_1 = __webpack_require__(/*! reactstrap/lib/Button */ "./node_modules/reactstrap/lib/Button.js");
+const octicons_react_1 = __webpack_require__(/*! @githubprimer/octicons-react */ "./node_modules/@githubprimer/octicons-react/dist/index.esm.js");
+class WoWBanner extends React.Component {
+    componentDidMount() {
+        this.props.loadCountdownScript();
+    }
+    render() {
+        return this.props.enabled ? (React.createElement(Row_1.default, { className: "footer" },
+            React.createElement(Col_1.default, { xs: 3, className: "footerImage" },
+                React.createElement("img", { src: "/public/img/wow_logo.png" })),
+            React.createElement(Col_1.default, { xs: 3 },
+                React.createElement("div", { "data-type": "countdown", "data-id": "1203527", className: "tickcounter", style: {
+                        width: "100%",
+                        height: "100%",
+                        position: "relative"
+                    } },
+                    React.createElement("a", { href: "//www.tickcounter.com/countdown/1203527/world-of-warcraft-classic", title: "World of Warcraft Classic Countdown", target: "_blank" }, "World of Warcraft Classic"))),
+            React.createElement(Col_1.default, { xs: 1 }),
+            React.createElement(Col_1.default, { xs: 3 },
+                React.createElement("div", null,
+                    React.createElement("span", null,
+                        "Chyst\u00E1\u0161 se hr\u00E1t ",
+                        React.createElement("a", { href: "https://worldofwarcraft.com/en-us/wowclassic", target: "_blank" }, "WoW Classic"),
+                        "?",
+                        React.createElement("br", null),
+                        "Nev\u00E1hej a p\u0159idej se do SAP Labs komunity!",
+                        React.createElement("br", null),
+                        "Sta\u010D\u00ED napsat ",
+                        React.createElement("a", { href: "mailto:michal.kozubik@sap.com?subject=WoW%20Classic" }, "email.")))),
+            React.createElement(Col_1.default, { xs: 2 },
+                React.createElement(Button_1.default, { onClick: () => this.hide(), color: "danger", title: "Neotravuj!", style: {
+                        float: "right"
+                    } },
+                    React.createElement(octicons_react_1.default, { icon: octicons_react_1.X }))))) : null;
+    }
+    hide() {
+        this.props.hide();
+    }
+}
+exports.WoWBanner = WoWBanner;
 
 
 /***/ }),
@@ -66085,10 +66419,10 @@ class MenuSection extends React.Component {
     render() {
         let section = this.props.section;
         return (React.createElement(reactstrap_1.Table, { hover: true, striped: true },
-            section.name &&
+            section.name ?
                 React.createElement("thead", null,
                     React.createElement("tr", null,
-                        React.createElement("th", null, section.name))),
+                        React.createElement("th", null, section.name))) : null,
             React.createElement("tbody", null, section.meals.map((meal, index) => {
                 return (React.createElement("tr", { key: index },
                     React.createElement("td", null, meal.name),
@@ -66298,66 +66632,6 @@ exports.default = HeaderContainer;
 
 /***/ }),
 
-/***/ "./src/containers/News.ts":
-/*!********************************!*\
-  !*** ./src/containers/News.ts ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-const News_1 = __webpack_require__(/*! ../components/News */ "./src/components/News.tsx");
-const mapStateToProps = (state, ownProps) => {
-    let now = new Date();
-    return {
-        news: state.newFeatures.filter(f => {
-            let expiration = new Date(f.dateAdded);
-            expiration.setDate(expiration.getDate() + 5);
-            return !f.shown && expiration > now;
-        })
-    };
-};
-const NewsContainer = react_redux_1.connect(mapStateToProps, null)(News_1.News);
-exports.default = NewsContainer;
-
-
-/***/ }),
-
-/***/ "./src/containers/NewsItem.ts":
-/*!************************************!*\
-  !*** ./src/containers/NewsItem.ts ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-const NewsItem_1 = __webpack_require__(/*! ../components/NewsItem */ "./src/components/NewsItem.tsx");
-const news_1 = __webpack_require__(/*! ../actions/news */ "./src/actions/news.ts");
-const mapStateToProps = (state, ownProps) => {
-    return {
-        id: ownProps.id,
-        description: ownProps.feature.description
-    };
-};
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        close: () => {
-            dispatch(news_1.markRead(ownProps.feature));
-        }
-    };
-};
-const NewsItemContainer = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(NewsItem_1.NewsItem);
-exports.default = NewsItemContainer;
-
-
-/***/ }),
-
 /***/ "./src/containers/Panel.ts":
 /*!*********************************!*\
   !*** ./src/containers/Panel.ts ***!
@@ -66443,6 +66717,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 const Settings_1 = __webpack_require__(/*! ../components/Settings */ "./src/components/Settings.tsx");
 const settings_1 = __webpack_require__(/*! ../actions/settings */ "./src/actions/settings.ts");
+const effectTypes_1 = __webpack_require__(/*! ../effects/effectTypes */ "./src/effects/effectTypes.ts");
 const mapStateToProps = (state) => {
     return {
         show: state.showSettings,
@@ -66454,9 +66729,13 @@ const mapStateToProps = (state) => {
                 };
             }),
             effects: [{
-                    id: "snowFall",
+                    id: effectTypes_1.default.SnowFall,
                     name: "Snow",
                     disabled: true
+                }, {
+                    id: effectTypes_1.default.WoWBanner,
+                    name: "WoW Banner",
+                    disabled: false
                 }].map(effect => {
                 effect.disabled = state.effects.some(e => e.id === effect.id && e.disabled);
                 return effect;
@@ -66493,11 +66772,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 const libraries_1 = __webpack_require__(/*! ../actions/libraries */ "./src/actions/libraries.ts");
 const Snow_1 = __webpack_require__(/*! ../components/Snow */ "./src/components/Snow.tsx");
+const effectTypes_1 = __webpack_require__(/*! ../effects/effectTypes */ "./src/effects/effectTypes.ts");
 const SCRIPT_SOURCE = `https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.7.4/snowfall.min.js`;
 const mapStateToProps = (state) => {
     return {
         snowFall: state.libraries.snowFall,
-        enabled: !state.effects.some(e => e.id === "snowFall" && e.disabled)
+        enabled: !state.effects.some(e => e.id === effectTypes_1.default.SnowFall && e.disabled)
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -66509,6 +66789,63 @@ const mapDispatchToProps = (dispatch) => {
 };
 const Container = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(Snow_1.Snow);
 exports.default = Container;
+
+
+/***/ }),
+
+/***/ "./src/containers/WoWBanner.ts":
+/*!*************************************!*\
+  !*** ./src/containers/WoWBanner.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+const WoWBanner_1 = __webpack_require__(/*! ../components/WoWBanner */ "./src/components/WoWBanner.tsx");
+const libraries_1 = __webpack_require__(/*! ../actions/libraries */ "./src/actions/libraries.ts");
+const effect_1 = __webpack_require__(/*! ../actions/effect */ "./src/actions/effect.ts");
+const effectTypes_1 = __webpack_require__(/*! ../effects/effectTypes */ "./src/effects/effectTypes.ts");
+const SCRIPT_SOURCE = "//www.tickcounter.com/static/js/loader.js";
+const ACTIVE_TO = new Date(2019, 7, 31);
+const mapStateToProps = (state) => {
+    let isRelevant = ACTIVE_TO > new Date();
+    return {
+        enabled: isRelevant && !state.effects.some(e => e.id === effectTypes_1.default.WoWBanner && e.disabled)
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadCountdownScript: () => {
+            dispatch(libraries_1.loadLibrary([SCRIPT_SOURCE], "tickcounter-sdk"));
+        },
+        hide: () => {
+            dispatch(effect_1.disableEffect(effectTypes_1.default.WoWBanner));
+        }
+    };
+};
+const WoWBannerContainer = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(WoWBanner_1.WoWBanner);
+exports.default = WoWBannerContainer;
+
+
+/***/ }),
+
+/***/ "./src/effects/effectTypes.ts":
+/*!************************************!*\
+  !*** ./src/effects/effectTypes.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    SnowFall: "snowFall",
+    WoWBanner: "wowBanner"
+};
 
 
 /***/ }),
@@ -66557,6 +66894,14 @@ function effects(state = defaultState, action) {
         case actionTypes_1.default.Settings_Save: {
             let settings = action.payload;
             return settings.effects.slice();
+        }
+        case actionTypes_1.default.Effect_Disable: {
+            return state.slice()
+                .filter(effect => effect.id !== action.payload)
+                .concat({
+                id: action.payload,
+                disabled: true
+            });
         }
     }
     return state;

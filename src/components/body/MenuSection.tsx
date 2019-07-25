@@ -13,10 +13,10 @@ export class MenuSection extends React.Component<ISectionProps, {}> {
 
 		return (
 			<Table hover striped>
-				{ section.name &&
+				{ section.name ?
 					<thead>
 						<tr><th>{section.name}</th></tr>
-					</thead>
+					</thead> : null
 				}
 				<tbody>
 				{

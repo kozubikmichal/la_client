@@ -25,5 +25,7 @@ export default {
 	Library_Load_Failure: "Library_Load_Failure",
 
 
-	Map_ActivateMarker: "Map_ActivateMarker"
+	Map_ActivateMarker: "Map_ActivateMarker",
+
+	Effect_Disable: "Effect_Disable"
 }

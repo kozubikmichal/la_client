@@ -12,6 +12,14 @@ export function effects(state: IEffect[] = defaultState, action: IAction): IEffe
 			let settings: ISettings = action.payload;
 			return settings.effects.slice();
 		}
+		case actionTypes.Effect_Disable: {
+			return state.slice()
+				.filter(effect => effect.id !== action.payload)
+				.concat({
+					id: action.payload,
+					disabled: true
+				});
+		}
 	}
 
 	return state;

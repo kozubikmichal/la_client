@@ -37,9 +37,12 @@ html, body, #example {
 	left: 0;
 	bottom: 0;
 	padding: 0.25rem;
-	background-color: darkkhaki;
+	background-color: black;
 	text-align: center;
 	font-weight: bold;
+	color: white;
+	max-height: 5rem;
+	height: 5rem;
 }
 .modal-fullscreen {
 	display: table;
@@ -97,3 +100,17 @@ html, body, #example {
 	background-color:lightslategray;
 	color: white;
  }
+
+ .footerImage {
+	 max-height: 100%;
+ }
+
+ .footerImage > img {
+	height: 100%;
+    width: auto;
+}
+
+.footer a {
+	color: khaki;
+	font-weight: bold;
+}
