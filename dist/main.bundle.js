@@ -66277,7 +66277,7 @@ class WoWBanner extends React.Component {
                         height: "100%",
                         position: "relative"
                     } },
-                    React.createElement("a", { href: "//www.tickcounter.com/countdown/1203527/world-of-warcraft-classic", title: "World of Warcraft Classic Countdown", target: "_blank" }, "World of Warcraft Classic"))),
+                    React.createElement("a", { href: "//www.tickcounter.com/countdown/1203527/world-of-warcraft-classic", title: "World of Warcraft Classic Countdown", target: "_blank" }, "World of Warcraft Classic Countdown"))),
             React.createElement(Col_1.default, { xs: 1 }),
             React.createElement(Col_1.default, { xs: 3 },
                 React.createElement("div", null,

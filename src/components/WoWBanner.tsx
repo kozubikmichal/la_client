@@ -30,7 +30,7 @@ export class WoWBanner extends React.Component<IWoWBannerDataProps & IWoWBannerC
 						height: "100%",
 						position: "relative"
 					}}>
-							<a href="//www.tickcounter.com/countdown/1203527/world-of-warcraft-classic" title="World of Warcraft Classic Countdown" target="_blank">World of Warcraft Classic</a>
+							<a href="//www.tickcounter.com/countdown/1203527/world-of-warcraft-classic" title="World of Warcraft Classic Countdown" target="_blank">World of Warcraft Classic Countdown</a>
 					</div>
 				</Col>
 				<Col xs={1} />
