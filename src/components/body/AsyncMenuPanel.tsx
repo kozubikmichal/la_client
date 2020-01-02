@@ -10,6 +10,7 @@ import { MenuSection } from "./MenuSection";
 import { PDFPreview } from "./PDFPreview";
 import CardBody from "reactstrap/lib/CardBody";
 import CardHeader from "reactstrap/lib/CardHeader";
+import { ImagePlaceholder } from "../ImagePlaceholder";
 
 export interface IAsyncMenuPanelDataProps {
 	menu: IMenu,
@@ -37,7 +38,7 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 
 	render() {
 		let { restaurant, menu } = this.props;
-		let main = menu && menu.menus[0] || EMPTY_SECTION;
+		let main = menu && menu.menus[0];
 		let others = menu && menu.menus.slice(1);
 		let isPDF = menu && menu.type === MenuType.PDF;
 
@@ -50,7 +51,9 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 					<CardBody>
 						{
 							isPDF ? (<PDFPreview restaurant={restaurant} pdfInfo={menu.pdfInfo} />) :
-							menu ? this.getSections(main, others) : (<Loader />)
+							main && main.meals.length ? this.getSections(main, others) :
+							menu ? (<ImagePlaceholder path="/public/img/no_lunch_today.jpg" />) :
+							(<Loader />)
 						}
 					</CardBody>
 				</Collapse>
