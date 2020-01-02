@@ -66324,6 +66324,10 @@ const MenuSection_1 = __webpack_require__(/*! ./MenuSection */ "./src/components
 const PDFPreview_1 = __webpack_require__(/*! ./PDFPreview */ "./src/components/body/PDFPreview.tsx");
 const CardBody_1 = __webpack_require__(/*! reactstrap/lib/CardBody */ "./node_modules/reactstrap/lib/CardBody.js");
 const CardHeader_1 = __webpack_require__(/*! reactstrap/lib/CardHeader */ "./node_modules/reactstrap/lib/CardHeader.js");
+const EMPTY_SECTION = {
+    name: "",
+    meals: []
+};
 class AsyncMenuPanel extends React.Component {
     constructor() {
         super(...arguments);
@@ -66334,7 +66338,7 @@ class AsyncMenuPanel extends React.Component {
     }
     render() {
         let { restaurant, menu } = this.props;
-        let main = menu && menu.menus[0];
+        let main = menu && menu.menus[0] || EMPTY_SECTION;
         let others = menu && menu.menus.slice(1);
         let isPDF = menu && menu.type === IMenu_1.MenuType.PDF;
         return (React.createElement(reactstrap_1.Card, null,

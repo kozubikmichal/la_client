@@ -23,6 +23,11 @@ export interface IAsyncMenuPanelCallbackProps {
 	loadMenu: () => void
 }
 
+const EMPTY_SECTION: IMenuSection = {
+	name: "",
+	meals: []
+};
+
 export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & IAsyncMenuPanelCallbackProps, {}> {
 	private toggle = () => this.props.onPressHeader(this.props.expanded);
 
@@ -32,7 +37,7 @@ export class AsyncMenuPanel extends React.Component<IAsyncMenuPanelDataProps & I
 
 	render() {
 		let { restaurant, menu } = this.props;
-		let main = menu && menu.menus[0];
+		let main = menu && menu.menus[0] || EMPTY_SECTION;
 		let others = menu && menu.menus.slice(1);
 		let isPDF = menu && menu.type === MenuType.PDF;
 
