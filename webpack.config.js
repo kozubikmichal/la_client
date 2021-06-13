@@ -63,10 +63,5 @@ module.exports = {
 		// "react-dom": "ReactDOM"
 	},
 
-	node: {
-		console: true,
-		fs: 'empty',
-		net: 'empty',
-		tls: 'empty'
-	}
+	node: false
 };

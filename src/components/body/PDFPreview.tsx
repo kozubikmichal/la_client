@@ -78,8 +78,8 @@ export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
 		let corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`
 
 		pdflib.GlobalWorkerOptions.workerSrc = "../dist/pdf.worker.bundle.js";
-		return pdflib.getDocument(corsAwareUrl).then((pdf: any) => {
-			return pdf.getPage(pdfInfo.pages[0]).then((page: any) => {
+		return pdflib.getDocument(corsAwareUrl).promise.then((pdf) => {
+			return pdf.getPage(pdfInfo.pages[0]).then((page) => {
 				this.setState({
 					loaded: true,
 					page: page

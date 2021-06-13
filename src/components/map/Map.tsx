@@ -1,7 +1,5 @@
 import * as React from "react";
 import { ReactElement, ReactChild } from "react";
-import Marker from "../../containers/map/Marker";
-import { IMarkerDataProps } from "./Marker";
 
 export interface IMapDataProps {
 	google: any
@@ -47,7 +45,7 @@ export class Map extends React.Component<IMapDataProps, {}> {
 			return;
 		}
 
-		return React.Children.map(children, c => this.cloneChild(c, {
+		return React.Children.map(children, c => this.cloneChild(c as ReactChild, {
 			google: this.props.google,
 			map: this.state.map
 		}));
