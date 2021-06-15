@@ -5,6 +5,7 @@ import * as pdflib from "pdfjs-dist";
 import { IRestaurant, IPDFInfo } from "../../IMenu";
 import { Loader } from "../Loader";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { PDFPageProxy } from "pdfjs-dist/types/display/api";
 
 export interface IPDFPreviewDataProps {
 	restaurant: IRestaurant,
@@ -14,7 +15,7 @@ export interface IPDFPreviewDataProps {
 interface IState {
 	loaded: boolean,
 	fullscreen: boolean,
-	page: any
+	page: PDFPageProxy
 }
 
 export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
@@ -75,10 +76,12 @@ export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
 	}
 
 	private loadPDF(pdfInfo: IPDFInfo): Promise<any> {
-		let corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`
+		const corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`;
+		const pdfSource = pdfInfo.content ?? corsAwareUrl;
 
 		pdflib.GlobalWorkerOptions.workerSrc = "../dist/pdf.worker.bundle.js";
-		return pdflib.getDocument(corsAwareUrl).promise.then((pdf) => {
+
+		return pdflib.getDocument(pdfSource).promise.then((pdf) => {
 			return pdf.getPage(pdfInfo.pages[0]).then((page) => {
 				this.setState({
 					loaded: true,
@@ -90,8 +93,10 @@ export class PDFPreview extends React.Component<IPDFPreviewDataProps, {}> {
 		});
 	}
 
-	private renderPage(canvasId: string, scale: number, page: any) {
-		let viewport = page.getViewport(scale);
+	private renderPage(canvasId: string, scale: number, page: PDFPageProxy) {
+		let viewport = page.getViewport({
+			scale: scale
+		});
 		let canvas = document.getElementById(canvasId) as HTMLCanvasElement;
 		let context = canvas.getContext("2d");
 

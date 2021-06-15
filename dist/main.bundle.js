@@ -1019,9 +1019,11 @@ class PDFPreview extends React.Component {
                     React.createElement("canvas", { id: this.FullscreenCanvasId, hidden: !loaded })))));
     }
     loadPDF(pdfInfo) {
-        let corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`;
+        var _a;
+        const corsAwareUrl = `https://cors-anywhere.herokuapp.com/${pdfInfo.url}`;
+        const pdfSource = (_a = pdfInfo.content) !== null && _a !== void 0 ? _a : corsAwareUrl;
         pdflib.GlobalWorkerOptions.workerSrc = "../dist/pdf.worker.bundle.js";
-        return pdflib.getDocument(corsAwareUrl).promise.then((pdf) => {
+        return pdflib.getDocument(pdfSource).promise.then((pdf) => {
             return pdf.getPage(pdfInfo.pages[0]).then((page) => {
                 this.setState({
                     loaded: true,
@@ -1032,7 +1034,9 @@ class PDFPreview extends React.Component {
         });
     }
     renderPage(canvasId, scale, page) {
-        let viewport = page.getViewport(scale);
+        let viewport = page.getViewport({
+            scale: scale
+        });
         let canvas = document.getElementById(canvasId);
         let context = canvas.getContext("2d");
         canvas.height = viewport.height;
