@@ -23,11 +23,7 @@ export interface IHeaderCallbackProps {
 export class Header extends React.Component<IHeaderDataProps & IHeaderCallbackProps, {}> {
 	private dateManager = new DateManager();
 	state: IState = {
-		now: null
-	}
-
-	componentWillMount() {
-		this.updateTime();
+		now: this.dateManager.getToday()
 	}
 
 	componentDidMount() {
