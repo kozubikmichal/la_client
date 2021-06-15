@@ -24,6 +24,9 @@ export class MapContainer extends React.Component<IMapContainerDataProps & IMapC
 
 	render() {
 		let { google, restaurants }  = this.props;
+		let mapProps = {
+			google: google
+		};
 
 		return google ?
 			(
@@ -32,7 +35,7 @@ export class MapContainer extends React.Component<IMapContainerDataProps & IMapC
 						height: "800px"
 					}}
 					>
-					<Map google={google} >
+					<Map {...mapProps} >
 						{restaurants.map((restaurant) => {
 							return (<Marker restaurant={restaurant} key={restaurant.id} />)
 						})}
